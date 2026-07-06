@@ -9,6 +9,14 @@
     "reports": "Reports",
     "menu": "Menu"
   },
+  "header": {
+    "searchPlaceholder": "Search a transaction or recipient...",
+    "notifications": "Notifications",
+    "help": "Help"
+  },
+  "footer": {
+    "rights": "© 2026 My Transfers. All rights reserved. Licensed by the Central Bank."
+  },
   "language": {
     "label": "Language",
     "arabic": "العربية",
@@ -21,7 +29,7 @@
     "settings": "Settings",
     "logout": "Logout",
     "greeting": "Welcome",
-    "role": "Administrator"
+    "role": "Premium Client"
   },
   "auth": {
     "loginSuccess": "Welcome back!",
@@ -66,19 +74,55 @@
     "actions": "Actions",
     "loading": "Loading...",
     "all": "All",
-    "status": "Status"
+    "status": "Status",
+    "filter": "Filter"
   },
   "dashboard": {
     "title": "Dashboard",
     "subtitle": "Overview of your transfer activity",
     "newTransfer": "New Transfer",
-    "stats": {
-      "totalTransfers": "Total Transfers",
-      "totalVolume": "Total Volume",
-      "activeCustomers": "Active Customers",
-      "pending": "Pending"
+    "balance": {
+      "available": "Total available balance",
+      "account": "Account number",
+      "details": "Balance details"
     },
-    "recentTransfers": "Recent Transfers"
+    "quickActions": {
+      "send": "Send",
+      "request": "Request",
+      "topup": "Top up",
+      "more": "More"
+    },
+    "scheduled": {
+      "title": "Scheduled transfers",
+      "viewAll": "View all",
+      "dueLabel": "Due",
+      "rent": "Office rent - monthly",
+      "utilities": "Utilities bill"
+    },
+    "insights": {
+      "title": "Spending insights",
+      "monthlySpending": "This month's spending"
+    },
+    "days": {
+      "sat": "Sat",
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed"
+    },
+    "transactions": {
+      "title": "Recent transactions",
+      "subtitle": "Track your latest financial activity in one place",
+      "party": "Recipient / Sender",
+      "type": "Type",
+      "loadMore": "Load more transactions",
+      "online": "Online purchase",
+      "incoming": "Incoming account transfer",
+      "expenseShare": "Expense sharing",
+      "direct": "Direct debit",
+      "bankTransfer": "Bank transfer",
+      "requestType": "Transfer request"
+    }
   },
   "banks": {
     "title": "Banks",

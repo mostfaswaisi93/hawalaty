@@ -1,31 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
 import { AppLanguage, LanguageService } from '../../core/language.service';
 
 @Component({
   selector: 'app-language-switcher',
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, TranslateModule],
   template: `
-    <button
-      mat-button
-      [matMenuTriggerFor]="menu"
-      [attr.aria-label]="'language.switch' | translate">
-      <mat-icon>language</mat-icon>
-      <span class="mx-2 align-middle">{{ language.meta().label }}</span>
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
+    <div class="flex items-center gap-4 text-body-sm">
       @for (lang of languages; track lang.code) {
-        <button mat-menu-item (click)="select(lang.code)">
-          <mat-icon>{{ language.current() === lang.code ? 'check' : 'translate' }}</mat-icon>
-          <span>{{ lang.label }}</span>
+        <button
+          type="button"
+          (click)="select(lang.code)"
+          [class]="
+            language.current() === lang.code
+              ? 'text-primary font-bold border-b-2 border-primary pb-1'
+              : 'text-on-surface-variant hover:text-primary transition-colors'
+          ">
+          {{ lang.label }}
         </button>
       }
-    </mat-menu>
+    </div>
   `,
 })
 export class LanguageSwitcher {

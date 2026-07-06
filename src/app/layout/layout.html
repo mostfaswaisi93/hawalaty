@@ -1,62 +1,111 @@
-<div class="flex h-screen flex-col">
-  <mat-toolbar class="app-toolbar z-20 !h-16 gap-1 text-white shadow-md">
-    <button mat-icon-button (click)="drawer.toggle()" [attr.aria-label]="'nav.menu' | translate">
-      <mat-icon>menu</mat-icon>
-    </button>
+<!-- Mobile backdrop -->
+@if (sidebarOpen()) {
+  <div class="fixed inset-0 z-40 bg-black/30 lg:hidden" (click)="sidebarOpen.set(false)"></div>
+}
 
-    <div class="mx-1 flex items-center gap-2">
-      <mat-icon>account_balance_wallet</mat-icon>
-      <span class="text-lg font-bold">{{ 'app.name' | translate }}</span>
+<!-- Sidebar -->
+<aside
+  class="fixed start-0 top-0 z-50 flex h-screen w-64 flex-col border-outline-variant bg-surface-container-low px-inline-md py-stack-md shadow-sm transition-transform duration-300 lg:translate-x-0 rtl:border-s-0 rtl:border-e ltr:border-e"
+  [class.translate-x-0]="sidebarOpen()"
+  [class.ltr:-translate-x-full]="!sidebarOpen()"
+  [class.rtl:translate-x-full]="!sidebarOpen()">
+  <div class="mb-10 px-4">
+    <h1 class="font-display-lg text-display-lg font-bold text-primary">{{ 'app.name' | translate }}</h1>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">My Transfers</p>
+  </div>
+
+  <nav class="flex-1 space-y-2">
+    @for (item of nav; track item.link) {
+      <a
+        [routerLink]="item.link"
+        routerLinkActive
+        #rla="routerLinkActive"
+        (click)="sidebarOpen.set(false)"
+        class="flex items-center gap-3 rounded-lg border-s-4 border-transparent px-4 py-3 transition-all duration-200"
+        [class.bg-surface-container-high]="rla.isActive"
+        [class.text-primary]="rla.isActive"
+        [class.font-bold]="rla.isActive"
+        [class.!border-primary]="rla.isActive"
+        [class.text-on-surface-variant]="!rla.isActive"
+        [class.hover:bg-surface-container-highest]="!rla.isActive">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span class="font-body-lg text-body-lg">{{ item.key | translate }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="mt-auto px-2">
+    <a
+      routerLink="/dashboard"
+      (click)="sidebarOpen.set(false)"
+      class="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary-container px-6 py-4 font-bold text-on-secondary-fixed shadow-lg transition-all hover:opacity-90 active:scale-95">
+      <mat-icon>add</mat-icon>
+      <span class="font-body-lg text-body-lg">{{ 'dashboard.newTransfer' | translate }}</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main wrapper -->
+<div class="flex min-h-screen flex-col lg:ms-64">
+  <!-- Header -->
+  <header
+    class="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-outline-variant bg-surface px-inline-lg">
+    <div class="flex flex-1 items-center gap-3">
+      <button
+        class="text-on-surface-variant lg:hidden"
+        (click)="sidebarOpen.set(!sidebarOpen())"
+        [attr.aria-label]="'nav.menu' | translate">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="relative w-full max-w-md">
+        <span class="material-symbols-outlined absolute inset-inline-start-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+        <input
+          type="text"
+          [placeholder]="'header.searchPlaceholder' | translate"
+          class="w-full rounded-full border-none bg-surface-container-low py-2 pe-4 ps-10 text-body-sm focus:bg-surface-container focus:ring-2 focus:ring-primary" />
+      </div>
     </div>
 
-    <span class="flex-1"></span>
+    <div class="flex items-center gap-4 md:gap-6">
+      <app-language-switcher />
 
-    <app-language-switcher />
+      <div class="flex items-center gap-3 border-s border-outline-variant ps-4 md:ps-6">
+        <button
+          class="hidden text-on-surface-variant transition-transform hover:text-primary active:scale-95 sm:block"
+          [matTooltip]="'header.notifications' | translate">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <button
+          class="hidden text-on-surface-variant transition-transform hover:text-primary active:scale-95 sm:block"
+          [matTooltip]="'header.help' | translate">
+          <mat-icon>help</mat-icon>
+        </button>
 
-    <!-- User menu -->
-    <button mat-button [matMenuTriggerFor]="userMenu" class="!rounded-full">
-      <span class="grid h-9 w-9 place-items-center rounded-full bg-white/20 text-sm font-bold">
-        {{ auth.initials() }}
-      </span>
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <div class="flex items-center gap-3 px-4 py-3">
-        <span class="grid h-10 w-10 place-items-center rounded-full bg-sky-100 font-bold text-sky-700">
-          {{ auth.initials() }}
-        </span>
-        <div class="leading-tight">
-          <div class="font-semibold">{{ auth.user()?.name }}</div>
-          <div class="text-xs opacity-60">{{ (auth.user()?.role || '') | translate }}</div>
-        </div>
+        <button class="flex items-center gap-3 ms-1" [matMenuTriggerFor]="userMenu">
+          <div class="hidden text-start sm:block">
+            <p class="text-body-sm font-bold leading-none">{{ auth.user()?.name }}</p>
+            <p class="text-[10px] text-outline">{{ (auth.user()?.role || '') | translate }}</p>
+          </div>
+          <span class="grid h-10 w-10 place-items-center rounded-full border-2 border-primary-container bg-primary text-sm font-bold text-on-primary">
+            {{ auth.initials() }}
+          </span>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>{{ 'user.logout' | translate }}</span>
+          </button>
+        </mat-menu>
       </div>
-      <mat-divider />
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>{{ 'user.logout' | translate }}</span>
-      </button>
-    </mat-menu>
-  </mat-toolbar>
+    </div>
+  </header>
 
-  <mat-sidenav-container class="flex-1 !bg-transparent">
-    <mat-sidenav #drawer mode="side" opened class="w-64 border-0 !bg-white">
-      <mat-nav-list class="pt-2">
-        @for (item of nav; track item.link) {
-          <a
-            mat-list-item
-            [routerLink]="item.link"
-            routerLinkActive
-            #rla="routerLinkActive"
-            [activated]="rla.isActive"
-            class="!mx-2 !mb-1 !rounded-xl">
-            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-            <span matListItemTitle>{{ item.key | translate }}</span>
-          </a>
-        }
-      </mat-nav-list>
-    </mat-sidenav>
+  <!-- Content -->
+  <main class="mx-auto w-full max-w-7xl flex-1 p-inline-lg">
+    <router-outlet />
+  </main>
 
-    <mat-sidenav-content class="p-4 md:p-6">
-      <router-outlet />
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <footer class="mt-auto border-t border-outline-variant/40 p-6 text-center text-body-sm text-outline">
+    <p>{{ 'footer.rights' | translate }}</p>
+  </footer>
 </div>

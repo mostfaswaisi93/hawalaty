@@ -1,30 +1,36 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
+import { RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MOCK_TRANSFERS, Transfer, TransferStatus } from '../../data/transfers';
-import { LocalCurrencyPipe, LocalDatePipe, LocalNumberPipe } from '../../core/localize.pipes';
-import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
+import { LocalNumberPipe, LocalDatePipe } from '../../core/localize.pipes';
+import { Transfer } from '../../data/transfers';
 import { TransferDialog } from './transfer-dialog';
+
+interface ScheduledItem {
+  name: string;
+  noteKey: string;
+  amount: number;
+  due: string;
+  icon: string;
+  avatar?: boolean;
+}
+
+interface Txn {
+  party: string;
+  noteKey: string;
+  date: string;
+  status: 'completed' | 'pending';
+  typeKey: string;
+  amount: number;
+  direction: 'in' | 'out' | 'neutral';
+  icon: string;
+}
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    MatChipsModule,
-    MatIconModule,
-    MatTableModule,
-    TranslateModule,
-    LocalNumberPipe,
-    LocalCurrencyPipe,
-    LocalDatePipe,
-  ],
+  imports: [RouterLink, MatIconModule, TranslateModule, LocalNumberPipe, LocalDatePipe],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
@@ -32,52 +38,36 @@ export class Dashboard {
   private readonly snackbar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
 
-  protected readonly transfers = signal<Transfer[]>([...MOCK_TRANSFERS]);
-  protected readonly columns = ['id', 'customer', 'amount', 'date', 'status', 'actions'];
+  protected readonly currency = 'IQD';
+  protected readonly balance = 12450.0;
+  protected readonly accountTail = '8824';
+  protected readonly monthlySpending = 4120000;
 
-  protected readonly totalVolume = computed(() =>
-    this.transfers().reduce((sum, t) => sum + t.amount, 0),
-  );
-  protected readonly pendingCount = computed(
-    () => this.transfers().filter((t) => t.status === 'pending').length,
-  );
-  protected readonly customerCount = computed(
-    () => new Set(this.transfers().map((t) => t.customer)).size,
-  );
+  protected readonly bars = [40, 65, 85, 50, 30];
+  protected readonly days = ['sat', 'sun', 'mon', 'tue', 'wed'];
 
-  protected statusColor(status: TransferStatus): 'primary' | 'accent' | 'warn' {
-    return status === 'completed' ? 'primary' : status === 'pending' ? 'accent' : 'warn';
-  }
+  protected readonly scheduled: ScheduledItem[] = [
+    { name: 'Sara Ali', noteKey: 'dashboard.scheduled.rent', amount: 500000, due: '2026-07-25', icon: 'person', avatar: true },
+    { name: 'Electricity Co.', noteKey: 'dashboard.scheduled.utilities', amount: 75250, due: '2026-07-07', icon: 'bolt' },
+  ];
 
-  protected addTransfer(): void {
+  protected readonly transactions: Txn[] = [
+    { party: 'Amazon Global', noteKey: 'dashboard.transactions.online', date: '2026-07-04', status: 'completed', typeKey: 'dashboard.transactions.direct', amount: -145000, direction: 'out', icon: 'shopping_bag' },
+    { party: 'Rafidain Bank', noteKey: 'dashboard.transactions.incoming', date: '2026-07-02', status: 'completed', typeKey: 'dashboard.transactions.bankTransfer', amount: 2500000, direction: 'in', icon: 'account_balance' },
+    { party: 'Jasim Abbas', noteKey: 'dashboard.transactions.expenseShare', date: '2026-06-29', status: 'pending', typeKey: 'dashboard.transactions.requestType', amount: 50000, direction: 'neutral', icon: 'group' },
+  ];
+
+  protected newTransfer(): void {
     this.dialog
       .open(TransferDialog, { width: '480px', maxWidth: '95vw' })
       .afterClosed()
       .subscribe((result?: Transfer) => {
         if (!result) return;
-        this.transfers.update((list) => [result, ...list]);
-        this.notify('messages.saveSuccess');
+        this.snackbar.open(
+          this.translate.instant('messages.saveSuccess'),
+          this.translate.instant('common.close'),
+          { duration: 3000 },
+        );
       });
-  }
-
-  protected deleteTransfer(transfer: Transfer): void {
-    this.dialog
-      .open(ConfirmDialog, {
-        width: '400px',
-        maxWidth: '95vw',
-        data: { titleKey: 'messages.deleteConfirmTitle', messageKey: 'messages.deleteConfirmText' },
-      })
-      .afterClosed()
-      .subscribe((confirmed?: boolean) => {
-        if (!confirmed) return;
-        this.transfers.update((list) => list.filter((t) => t.id !== transfer.id));
-        this.notify('messages.deleteSuccess');
-      });
-  }
-
-  private notify(key: string): void {
-    this.snackbar.open(this.translate.instant(key), this.translate.instant('common.close'), {
-      duration: 3000,
-    });
   }
 }

@@ -9,6 +9,14 @@
     "reports": "التقارير",
     "menu": "القائمة"
   },
+  "header": {
+    "searchPlaceholder": "بحث عن معاملة أو مستلم...",
+    "notifications": "الإشعارات",
+    "help": "المساعدة"
+  },
+  "footer": {
+    "rights": "© 2026 حوالاتي. جميع الحقوق محفوظة. مرخّص من قبل البنك المركزي."
+  },
   "language": {
     "label": "اللغة",
     "arabic": "العربية",
@@ -21,7 +29,7 @@
     "settings": "الإعدادات",
     "logout": "تسجيل الخروج",
     "greeting": "مرحباً",
-    "role": "مدير النظام"
+    "role": "عميل مميز"
   },
   "auth": {
     "loginSuccess": "مرحباً بعودتك!",
@@ -66,19 +74,55 @@
     "actions": "إجراءات",
     "loading": "جارٍ التحميل...",
     "all": "الكل",
-    "status": "الحالة"
+    "status": "الحالة",
+    "filter": "فلترة"
   },
   "dashboard": {
     "title": "لوحة التحكم",
     "subtitle": "نظرة عامة على نشاط حوالاتك",
     "newTransfer": "حوالة جديدة",
-    "stats": {
-      "totalTransfers": "إجمالي الحوالات",
-      "totalVolume": "إجمالي المبالغ",
-      "activeCustomers": "العملاء النشطون",
-      "pending": "قيد الانتظار"
+    "balance": {
+      "available": "إجمالي الرصيد المتوفر",
+      "account": "رقم الحساب",
+      "details": "تفاصيل الرصيد"
     },
-    "recentTransfers": "أحدث الحوالات"
+    "quickActions": {
+      "send": "إرسال",
+      "request": "طلب",
+      "topup": "شحن",
+      "more": "المزيد"
+    },
+    "scheduled": {
+      "title": "حوالات مجدولة",
+      "viewAll": "عرض الكل",
+      "dueLabel": "موعد",
+      "rent": "إيجار المكتب - شهرياً",
+      "utilities": "فاتورة الخدمات العامة"
+    },
+    "insights": {
+      "title": "تحليل النفقات",
+      "monthlySpending": "مصاريف هذا الشهر"
+    },
+    "days": {
+      "sat": "سبت",
+      "sun": "أحد",
+      "mon": "اثنين",
+      "tue": "ثلاثاء",
+      "wed": "أربعاء"
+    },
+    "transactions": {
+      "title": "آخر المعاملات",
+      "subtitle": "تتبّع نشاطك المالي الأخير في مكان واحد",
+      "party": "المستلم / المرسل",
+      "type": "النوع",
+      "loadMore": "تحميل المزيد من المعاملات",
+      "online": "مشتريات عبر الإنترنت",
+      "incoming": "تحويل وارد من حساب",
+      "expenseShare": "مشاركة نفقات",
+      "direct": "خصم مباشر",
+      "bankTransfer": "تحويل بنكي",
+      "requestType": "طلب حوالة"
+    }
   },
   "banks": {
     "title": "البنوك",

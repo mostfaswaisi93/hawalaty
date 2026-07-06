@@ -5,7 +5,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Angular Material M3 theme ---------- */
+/* ---------- Angular Material M3 theme (structure + typography) ---------- */
 html {
   color-scheme: light;
 
@@ -15,8 +15,6 @@ html {
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
     ),
-    // Font families reference the runtime CSS variable so Material text
-    // switches between Cairo (Arabic) and Inter (English) automatically.
     typography: (
       plain-family: var(--app-font),
       brand-family: var(--app-font),
@@ -25,9 +23,57 @@ html {
   ));
 }
 
+/* ---------- Brand palette → Material system tokens ----------
+   Overriding the --mat-sys-* tokens makes every Material component
+   (dialogs, form fields, menus, snackbars) use the exact project colors. */
+html {
+  --mat-sys-primary: #00236f;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #dce1ff;
+  --mat-sys-on-primary-container: #00164e;
+
+  --mat-sys-secondary: #904d00;
+  --mat-sys-on-secondary: #ffffff;
+  --mat-sys-secondary-container: #ffdcc3;
+  --mat-sys-on-secondary-container: #663500;
+
+  --mat-sys-tertiary: #272b2d;
+  --mat-sys-on-tertiary: #ffffff;
+  --mat-sys-tertiary-container: #e0e3e5;
+  --mat-sys-on-tertiary-container: #191c1e;
+
+  --mat-sys-error: #ba1a1a;
+  --mat-sys-on-error: #ffffff;
+  --mat-sys-error-container: #ffdad6;
+  --mat-sys-on-error-container: #93000a;
+
+  --mat-sys-background: #f8f9ff;
+  --mat-sys-on-background: #0b1c30;
+
+  --mat-sys-surface: #f8f9ff;
+  --mat-sys-on-surface: #0b1c30;
+  --mat-sys-surface-variant: #d3e4fe;
+  --mat-sys-on-surface-variant: #444651;
+  --mat-sys-surface-dim: #cbdbf5;
+  --mat-sys-surface-bright: #f8f9ff;
+  --mat-sys-surface-container-lowest: #ffffff;
+  --mat-sys-surface-container-low: #eff4ff;
+  --mat-sys-surface-container: #e5eeff;
+  --mat-sys-surface-container-high: #dce9ff;
+  --mat-sys-surface-container-highest: #d3e4fe;
+
+  --mat-sys-outline: #757682;
+  --mat-sys-outline-variant: #c5c5d3;
+  --mat-sys-surface-tint: #4059aa;
+
+  --mat-sys-inverse-surface: #213145;
+  --mat-sys-inverse-on-surface: #eaf1ff;
+  --mat-sys-inverse-primary: #b6c4ff;
+}
+
 /* ---------- Runtime font switching ---------- */
 :root {
-  --app-font: 'Inter', system-ui, sans-serif;
+  --app-font: 'Cairo', system-ui, sans-serif;
 }
 html.lang-ar {
   --app-font: 'Cairo', system-ui, sans-serif;
@@ -44,44 +90,47 @@ body {
 body {
   margin: 0;
   font-family: var(--app-font);
-  background: var(--mat-sys-surface-container-low, #f6f7f9);
-  color: var(--mat-sys-on-surface, #1a1c1e);
+  background-color: #f8f9ff;
+  color: #0b1c30;
 }
 
-/* Material icons must keep their own icon font regardless of language. */
-.material-icons,
+/* ---------- Icons: Material Symbols Outlined ---------- */
+.material-symbols-outlined,
 .mat-icon {
-  font-family: 'Material Icons' !important;
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- Brand ---------- */
-:root {
-  --brand-1: #0284c7; /* sky-600 */
-  --brand-2: #1d4ed8; /* blue-700 */
+/* ---------- Design utilities (from the design system) ---------- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Gradient app bar — reads well in both LTR and RTL. */
-.app-toolbar {
-  background: linear-gradient(90deg, var(--brand-2), var(--brand-1)) !important;
-  color: #fff !important;
+.tonal-elevation {
+  box-shadow: 0px 4px 20px rgba(30, 58, 138, 0.05);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tonal-elevation:hover {
+  transform: translateY(-2px);
 }
 
-/* Login brand panel. */
-.brand-panel {
-  background: linear-gradient(135deg, var(--brand-2) 0%, var(--brand-1) 100%);
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #dce1ff;
+  border-radius: 10px;
 }
 
-/* Active sidenav item. */
-.mat-mdc-list-item.mdc-list-item--activated {
-  background: rgba(2, 132, 199, 0.1) !important;
-  color: var(--brand-1) !important;
-}
-.mat-mdc-list-item.mdc-list-item--activated .mat-icon {
-  color: var(--brand-1) !important;
-}
-
-/* Softer card elevation. */
-.mat-mdc-card {
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.04) !important;
-}
+/* Active sidenav item is styled directly in the layout template. */

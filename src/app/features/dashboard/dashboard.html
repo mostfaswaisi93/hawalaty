@@ -1,115 +1,216 @@
-<section class="mx-auto max-w-6xl">
-  <!-- Header -->
-  <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-    <div>
-      <h1 class="text-2xl font-bold">{{ 'dashboard.title' | translate }}</h1>
-      <p class="text-sm opacity-70">{{ 'dashboard.subtitle' | translate }}</p>
+<div class="space-y-8">
+  <!-- Hero: Balance + Quick actions -->
+  <section class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <!-- Balance card -->
+    <div class="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary shadow-xl lg:col-span-2">
+      <div class="relative z-10 flex items-start justify-between">
+        <div>
+          <p class="mb-2 font-body-sm text-body-sm text-on-primary-container opacity-80">
+            {{ 'dashboard.balance.available' | translate }}
+          </p>
+          <h2 class="font-display-lg text-[48px] leading-none tracking-tight">
+            {{ balance | localNumber: { minimumFractionDigits: 2 } }}
+            <span class="text-xl font-normal opacity-70">{{ currency }}</span>
+          </h2>
+        </div>
+        <mat-icon class="!h-10 !w-10 !text-4xl opacity-30 transition-opacity group-hover:opacity-60">account_balance_wallet</mat-icon>
+      </div>
+
+      <div class="relative z-10 flex items-end justify-between">
+        <div class="space-y-1">
+          <p class="font-label-caps text-[10px] uppercase tracking-widest opacity-60">
+            {{ 'dashboard.balance.account' | translate }}
+          </p>
+          <p class="font-numeral-lg text-lg tracking-widest" dir="ltr">**** **** **** {{ accountTail }}</p>
+        </div>
+        <button class="rounded-lg bg-white/10 px-6 py-2 text-sm font-bold backdrop-blur-md transition-all hover:bg-white/20">
+          {{ 'dashboard.balance.details' | translate }}
+        </button>
+      </div>
     </div>
-    <button mat-flat-button color="primary" (click)="addTransfer()">
-      <mat-icon>add</mat-icon>
-      <span class="mx-1">{{ 'dashboard.newTransfer' | translate }}</span>
-    </button>
-  </div>
 
-  <!-- Stat cards -->
-  <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    <mat-card class="!rounded-2xl">
-      <mat-card-content class="flex items-center gap-3 p-4">
-        <mat-icon class="text-blue-600">swap_horiz</mat-icon>
-        <div>
-          <div class="text-xl font-bold">{{ transfers().length | localNumber }}</div>
-          <div class="text-xs opacity-70">{{ 'dashboard.stats.totalTransfers' | translate }}</div>
+    <!-- Quick actions -->
+    <div class="grid grid-cols-2 gap-4">
+      <button
+        (click)="newTransfer()"
+        class="tonal-elevation group flex flex-col items-center justify-center gap-3 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 transition-all hover:border-primary hover:bg-surface-container">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary-container/10 text-secondary transition-colors group-hover:bg-secondary-container group-hover:text-white">
+          <mat-icon>send</mat-icon>
         </div>
-      </mat-card-content>
-    </mat-card>
+        <span class="text-body-sm font-bold">{{ 'dashboard.quickActions.send' | translate }}</span>
+      </button>
 
-    <mat-card class="!rounded-2xl">
-      <mat-card-content class="flex items-center gap-3 p-4">
-        <mat-icon class="text-green-600">payments</mat-icon>
-        <div>
-          <div class="text-xl font-bold">{{ totalVolume() | localCurrency: 'USD' }}</div>
-          <div class="text-xs opacity-70">{{ 'dashboard.stats.totalVolume' | translate }}</div>
+      <button class="tonal-elevation group flex flex-col items-center justify-center gap-3 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 transition-all hover:border-primary hover:bg-surface-container">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+          <mat-icon>call_received</mat-icon>
         </div>
-      </mat-card-content>
-    </mat-card>
+        <span class="text-body-sm font-bold">{{ 'dashboard.quickActions.request' | translate }}</span>
+      </button>
 
-    <mat-card class="!rounded-2xl">
-      <mat-card-content class="flex items-center gap-3 p-4">
-        <mat-icon class="text-purple-600">group</mat-icon>
-        <div>
-          <div class="text-xl font-bold">{{ customerCount() | localNumber }}</div>
-          <div class="text-xs opacity-70">{{ 'dashboard.stats.activeCustomers' | translate }}</div>
+      <button class="tonal-elevation group flex flex-col items-center justify-center gap-3 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 transition-all hover:border-primary hover:bg-surface-container">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-tertiary/10 text-tertiary transition-colors group-hover:bg-tertiary group-hover:text-white">
+          <mat-icon>add_card</mat-icon>
         </div>
-      </mat-card-content>
-    </mat-card>
+        <span class="text-body-sm font-bold">{{ 'dashboard.quickActions.topup' | translate }}</span>
+      </button>
 
-    <mat-card class="!rounded-2xl">
-      <mat-card-content class="flex items-center gap-3 p-4">
-        <mat-icon class="text-amber-600">schedule</mat-icon>
-        <div>
-          <div class="text-xl font-bold">{{ pendingCount() | localNumber }}</div>
-          <div class="text-xs opacity-70">{{ 'dashboard.stats.pending' | translate }}</div>
+      <button class="tonal-elevation group flex flex-col items-center justify-center gap-3 rounded-2xl border border-outline-variant bg-surface-container-lowest p-6 transition-all hover:border-primary hover:bg-surface-container">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-surface-dim/30 text-on-surface-variant transition-colors group-hover:bg-primary-container group-hover:text-white">
+          <mat-icon>grid_view</mat-icon>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+        <span class="text-body-sm font-bold">{{ 'dashboard.quickActions.more' | translate }}</span>
+      </button>
+    </div>
+  </section>
 
-  <!-- Recent transfers table -->
-  <mat-card class="!rounded-2xl">
-    <mat-card-header class="p-4">
-      <mat-card-title>{{ 'dashboard.recentTransfers' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="overflow-x-auto p-0">
-      <table mat-table [dataSource]="transfers()" class="w-full">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.id' | translate }}</th>
-          <td mat-cell *matCellDef="let t">{{ t.id }}</td>
-        </ng-container>
+  <!-- Bento: Scheduled + Insights -->
+  <section class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <!-- Scheduled -->
+    <div class="glass-card tonal-elevation flex flex-col rounded-3xl p-6 lg:col-span-2">
+      <div class="mb-6 flex items-center justify-between">
+        <h3 class="font-headline-md text-headline-md">{{ 'dashboard.scheduled.title' | translate }}</h3>
+        <a routerLink="/reports" class="text-body-sm font-bold text-primary hover:underline">
+          {{ 'dashboard.scheduled.viewAll' | translate }}
+        </a>
+      </div>
 
-        <ng-container matColumnDef="customer">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.customer' | translate }}</th>
-          <td mat-cell *matCellDef="let t">{{ t.customer }}</td>
-        </ng-container>
+      <div class="space-y-4">
+        @for (item of scheduled; track item.name) {
+          <div class="flex items-center gap-4 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-4 transition-all hover:border-primary/40">
+            <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-surface-container text-primary-container">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </div>
+            <div class="flex-1">
+              <p class="text-body-lg font-bold">{{ item.name }}</p>
+              <p class="text-body-sm text-outline">{{ item.noteKey | translate }}</p>
+            </div>
+            <div class="text-end">
+              <p class="font-bold text-primary">{{ item.amount | localNumber }} {{ currency }}</p>
+              <p class="text-[11px] font-bold text-secondary">
+                {{ 'dashboard.scheduled.dueLabel' | translate }}: {{ item.due | localDate }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
 
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.amount' | translate }}</th>
-          <td mat-cell *matCellDef="let t">{{ t.amount | localCurrency: t.currency }}</td>
-        </ng-container>
+    <!-- Insights -->
+    <div class="tonal-elevation relative overflow-hidden rounded-3xl bg-inverse-surface p-6 text-inverse-on-surface">
+      <div class="relative z-10 flex h-full flex-col">
+        <div class="mb-8 flex items-center justify-between">
+          <h3 class="font-headline-md text-headline-md">{{ 'dashboard.insights.title' | translate }}</h3>
+          <mat-icon class="text-secondary-container">trending_up</mat-icon>
+        </div>
+        <div class="mt-auto">
+          <p class="mb-1 text-sm opacity-70">{{ 'dashboard.insights.monthlySpending' | translate }}</p>
+          <h4 class="mb-4 text-3xl font-bold">
+            {{ monthlySpending | localNumber }} <span class="text-sm">{{ currency }}</span>
+          </h4>
+          <div class="mt-4 flex h-24 items-end gap-2">
+            @for (bar of bars; track $index) {
+              <div
+                class="w-full rounded-t-lg transition-all duration-500"
+                [class.bg-secondary-container]="bar === 85"
+                [class.bg-primary-container]="bar !== 85"
+                [class.opacity-40]="bar !== 85"
+                [style.height.%]="bar"></div>
+            }
+          </div>
+          <div class="mt-2 flex justify-between font-label-caps text-[10px] opacity-50">
+            @for (day of days; track day) {
+              <span>{{ 'dashboard.days.' + day | translate }}</span>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+    </div>
+  </section>
 
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.date' | translate }}</th>
-          <td mat-cell *matCellDef="let t">{{ t.date | localDate }}</td>
-        </ng-container>
+  <!-- Recent transactions -->
+  <section class="tonal-elevation rounded-3xl border border-outline-variant/30 bg-surface-container-lowest p-8">
+    <div class="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+      <div>
+        <h3 class="font-headline-md text-headline-md">{{ 'dashboard.transactions.title' | translate }}</h3>
+        <p class="text-body-sm text-outline">{{ 'dashboard.transactions.subtitle' | translate }}</p>
+      </div>
+      <div class="flex w-full gap-2 md:w-auto">
+        <button class="flex items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-low px-4 py-2 text-body-sm font-bold transition-colors hover:bg-surface-container-high">
+          <mat-icon class="!text-lg">filter_list</mat-icon>
+          {{ 'common.filter' | translate }}
+        </button>
+        <button class="flex items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-low px-4 py-2 text-body-sm font-bold transition-colors hover:bg-surface-container-high">
+          <mat-icon class="!text-lg">download</mat-icon>
+          {{ 'common.export' | translate }}
+        </button>
+      </div>
+    </div>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.status' | translate }}</th>
-          <td mat-cell *matCellDef="let t">
-            <mat-chip [color]="statusColor(t.status)" highlighted>
-              {{ 'status.' + t.status | translate }}
-            </mat-chip>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>{{ 'table.actions' | translate }}</th>
-          <td mat-cell *matCellDef="let t">
-            <button
-              mat-icon-button
-              color="warn"
-              [attr.aria-label]="'common.delete' | translate"
-              (click)="deleteTransfer(t)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-outline-variant/30 text-outline">
+            <th class="pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'dashboard.transactions.party' | translate }}</th>
+            <th class="pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.date' | translate }}</th>
+            <th class="pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.status' | translate }}</th>
+            <th class="pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'dashboard.transactions.type' | translate }}</th>
+            <th class="pb-4 text-end font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.amount' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/20">
+          @for (t of transactions; track t.party) {
+            <tr class="cursor-pointer transition-colors hover:bg-surface-container-low/50">
+              <td class="py-5">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="flex h-10 w-10 items-center justify-center rounded-full"
+                    [class.bg-secondary-container]="t.direction === 'out'"
+                    [class.text-secondary]="t.direction === 'out'"
+                    [class.bg-primary]="t.direction === 'in'"
+                    [class.text-primary]="t.direction === 'neutral'"
+                    [class.bg-surface-dim]="t.direction === 'neutral'">
+                    <mat-icon class="!text-xl">{{ t.icon }}</mat-icon>
+                  </div>
+                  <div>
+                    <p class="text-body-sm font-bold">{{ t.party }}</p>
+                    <p class="text-[11px] text-outline">{{ t.noteKey | translate }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="py-5 text-body-sm text-on-surface-variant">{{ t.date | localDate }}</td>
+              <td class="py-5">
+                @if (t.status === 'completed') {
+                  <span class="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-[11px] font-bold text-green-700">
+                    <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                    {{ 'status.completed' | translate }}
+                  </span>
+                } @else {
+                  <span class="inline-flex items-center gap-1 rounded-full bg-secondary-container/20 px-3 py-1 text-[11px] font-bold text-secondary">
+                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-secondary-container"></span>
+                    {{ 'status.pending' | translate }}
+                  </span>
+                }
+              </td>
+              <td class="py-5 text-body-sm text-on-surface-variant">{{ t.typeKey | translate }}</td>
+              <td
+                class="py-5 text-end font-bold"
+                [class.text-error]="t.direction === 'out'"
+                [class.text-primary]="t.direction === 'in'"
+                [class.text-on-surface]="t.direction === 'neutral'"
+                dir="ltr">
+                {{ t.direction === 'out' ? '- ' : t.direction === 'in' ? '+ ' : '' }}{{ (t.amount < 0 ? -t.amount : t.amount) | localNumber }} {{ currency }}
+              </td>
+            </tr>
+          }
+        </tbody>
       </table>
+    </div>
 
-      @if (transfers().length === 0) {
-        <p class="p-6 text-center opacity-60">{{ 'table.noData' | translate }}</p>
-      }
-    </mat-card-content>
-  </mat-card>
-</section>
+    <div class="mt-8 flex justify-center">
+      <button class="rounded-xl border border-primary/20 px-6 py-2 text-body-sm font-bold text-primary transition-all hover:bg-primary/5">
+        {{ 'dashboard.transactions.loadMore' | translate }}
+      </button>
+    </div>
+  </section>
+</div>
