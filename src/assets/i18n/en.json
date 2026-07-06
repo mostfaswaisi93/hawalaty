@@ -5,9 +5,91 @@
   },
   "nav": {
     "dashboard": "Dashboard",
+    "transfers": "Transfers",
     "banks": "Banks",
     "reports": "Reports",
+    "settings": "Settings",
     "menu": "Menu"
+  },
+  "transfers": {
+    "title": "Send new money",
+    "subtitle": "Transfer money securely and quickly anywhere in the world.",
+    "chooseRecipient": "Choose recipient",
+    "addRecipient": "Add new recipient",
+    "searchRecipient": "Search by name, email, or phone number...",
+    "frequentRecipients": "Frequent recipients",
+    "new": "New",
+    "detailsTitle": "Transfer details",
+    "amountSent": "Amount sent",
+    "availableBalance": "Available balance",
+    "receiverGets": "Recipient gets",
+    "exchangeRate": "Exchange rate",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Add a short message for the recipient...",
+    "summary": "Transaction summary",
+    "baseAmount": "Base amount",
+    "transferFee": "Transfer fee",
+    "serviceFee": "Service fee",
+    "totalDue": "Total due",
+    "etaTitle": "Estimated arrival time",
+    "etaValue": "Within 15-30 minutes to the recipient's account",
+    "confirmSend": "Confirm & send",
+    "securityTitle": "Full protection",
+    "securityDesc": "All your transactions are encrypted and protected with the highest global security standards."
+  },
+  "settings": {
+    "verifiedAccount": "Verified Account",
+    "role": "Senior Financial Consultant",
+    "location": "Baghdad, Iraq",
+    "tier": {
+      "current": "Current Tier",
+      "name": "Gold Premium",
+      "next": "Next Tier: Platinum",
+      "viewBenefits": "View Benefits"
+    },
+    "tabs": {
+      "account": "Account Info",
+      "security": "Security",
+      "notifications": "Notifications",
+      "language": "Language"
+    },
+    "account": {
+      "title": "Account Information",
+      "subtitle": "Manage your personal details and public profile.",
+      "save": "Save Changes",
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "dob": "Date of Birth",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us a little about yourself..."
+    },
+    "security": {
+      "twoFactor": {
+        "title": "Two-Factor Authentication",
+        "desc": "Enhance your account security by adding an extra layer of protection.",
+        "action": "Setup Now"
+      },
+      "devices": {
+        "title": "Logged Devices",
+        "desc": "You are currently logged in on 3 active devices.",
+        "action": "Manage Devices"
+      }
+    },
+    "notifications": {
+      "title": "Latest Activity Notifications",
+      "seeAll": "See All Notifications",
+      "item1": {
+        "title": "Transfer Successful",
+        "desc": "To: Zaid Al-Mansour ($2,400.00)",
+        "time": "2 hours ago"
+      },
+      "item2": {
+        "title": "New Login Detected",
+        "desc": "iPhone 15 Pro • Baghdad, IQ",
+        "time": "Yesterday"
+      }
+    }
   },
   "header": {
     "searchPlaceholder": "Search a transaction or recipient...",
@@ -22,6 +104,10 @@
     "arabic": "العربية",
     "english": "English",
     "switch": "Switch language"
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode"
   },
   "user": {
     "account": "Account",
@@ -48,13 +134,20 @@
     "signingIn": "Signing in...",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "brandTitle": "Manage money transfers with confidence",
-    "brandSubtitle": "A modern, bilingual platform for banks, transfers and reports.",
+    "brandTitle": "Your trusted partner in money transfers",
+    "brandSubtitle": "World-class technology keeps your money fast and secure — full control over your local and international transactions in one click.",
     "feature1": "Real-time transfer tracking",
     "feature2": "Multi-bank & multi-currency support",
     "feature3": "Professional bilingual reports",
     "demoTitle": "Demo credentials",
-    "useDemo": "Use demo credentials"
+    "useDemo": "Use demo credentials",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "contactBank": "Contact your bank",
+    "copyright": "© 2026 My Transfers. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "support": "Contact Support"
   },
   "common": {
     "save": "Save",

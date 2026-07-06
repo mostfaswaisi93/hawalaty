@@ -1,0 +1,140 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div class="flex flex-col gap-2">
+    <h1 class="font-display-lg text-display-lg text-primary">{{ 'history.title' | translate }}</h1>
+    <p class="font-body-lg text-on-surface-variant">{{ 'history.subtitle' | translate }}</p>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="tonal-elevation flex items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-5">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300">
+        <span class="material-symbols-outlined">south_west</span>
+      </div>
+      <div>
+        <div class="text-xl font-bold" dir="ltr">{{ totalIn() | localNumber }} IQD</div>
+        <div class="text-xs text-on-surface-variant">{{ 'history.totalIn' | translate }}</div>
+      </div>
+    </div>
+    <div class="tonal-elevation flex items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-5">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary-container/15 text-secondary">
+        <span class="material-symbols-outlined">north_east</span>
+      </div>
+      <div>
+        <div class="text-xl font-bold" dir="ltr">{{ totalOut() | localNumber }} IQD</div>
+        <div class="text-xs text-on-surface-variant">{{ 'history.totalOut' | translate }}</div>
+      </div>
+    </div>
+    <div class="tonal-elevation flex items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-lowest p-5">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <span class="material-symbols-outlined">schedule</span>
+      </div>
+      <div>
+        <div class="text-xl font-bold">{{ pendingCount() | localNumber }}</div>
+        <div class="text-xs text-on-surface-variant">{{ 'history.pending' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table card -->
+  <div class="tonal-elevation rounded-3xl border border-outline-variant bg-surface-container-lowest p-6">
+    <!-- Filters -->
+    <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap gap-2">
+        @for (s of statuses; track s) {
+          <button
+            type="button"
+            (click)="setStatus(s)"
+            class="rounded-full border px-4 py-1.5 text-body-sm font-semibold transition-colors"
+            [class.border-primary]="status() === s"
+            [class.bg-primary]="status() === s"
+            [class.text-on-primary]="status() === s"
+            [class.border-outline-variant]="status() !== s"
+            [class.text-on-surface-variant]="status() !== s"
+            [class.hover:bg-surface-container]="status() !== s">
+            {{ (s === 'all' ? 'common.all' : 'status.' + s) | translate }}
+          </button>
+        }
+      </div>
+      <div class="flex w-full items-center gap-2 rounded-full bg-surface-container px-4 py-2 lg:w-72">
+        <span class="material-symbols-outlined text-outline">search</span>
+        <input
+          type="text"
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+          [placeholder]="'history.searchPlaceholder' | translate"
+          class="w-full border-none bg-transparent text-body-sm outline-none focus:ring-0" />
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-outline-variant/30 text-outline">
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'history.reference' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'dashboard.transactions.party' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.date' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.status' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-end font-label-caps text-[11px] uppercase tracking-wider">{{ 'table.amount' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/20">
+          @for (t of visible(); track t.ref) {
+            <tr class="cursor-pointer transition-colors hover:bg-surface-container-low/50">
+              <td class="whitespace-nowrap py-5 font-mono text-body-sm text-on-surface-variant" dir="ltr">{{ t.ref }}</td>
+              <td class="py-5">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="flex h-10 w-10 items-center justify-center rounded-full"
+                    [class.bg-secondary-container/10]="t.direction === 'out'"
+                    [class.text-secondary]="t.direction === 'out'"
+                    [class.bg-primary/10]="t.direction === 'in'"
+                    [class.text-primary]="t.direction === 'in'">
+                    <span class="material-symbols-outlined text-xl">{{ t.icon }}</span>
+                  </div>
+                  <div>
+                    <p class="whitespace-nowrap text-body-sm font-bold">{{ t.party }}</p>
+                    <p class="whitespace-nowrap text-[11px] text-outline">{{ t.noteKey | translate }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="whitespace-nowrap py-5 text-body-sm text-on-surface-variant">{{ t.date | localDate }}</td>
+              <td class="py-5">
+                <span class="inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold" [class]="statusPill(t.status)">
+                  <span class="h-1.5 w-1.5 rounded-full" [class]="dotColor(t.status)"></span>
+                  {{ 'status.' + t.status | translate }}
+                </span>
+              </td>
+              <td
+                class="whitespace-nowrap py-5 text-end font-bold"
+                [class.text-error]="t.direction === 'out'"
+                [class.text-primary]="t.direction === 'in'"
+                dir="ltr">
+                {{ t.direction === 'out' ? '- ' : '+ ' }}{{ t.amount | localNumber }} {{ t.currency }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (filtered().length === 0) {
+        <div class="flex flex-col items-center gap-3 py-16 text-center">
+          <span class="material-symbols-outlined text-5xl text-outline/50">receipt_long</span>
+          <p class="text-on-surface-variant">{{ 'history.empty' | translate }}</p>
+        </div>
+      }
+    </div>
+
+    @if (hasMore()) {
+      <div class="mt-8 flex justify-center">
+        <button
+          type="button"
+          (click)="loadMore()"
+          class="rounded-xl border border-primary/20 px-6 py-2 font-body-sm font-bold text-primary transition-all hover:bg-primary/5">
+          {{ 'dashboard.transactions.loadMore' | translate }}
+        </button>
+      </div>
+    }
+  </div>
+</div>

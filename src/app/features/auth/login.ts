@@ -1,32 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService, DEMO_EMAIL, DEMO_PASSWORD } from '../../core/auth.service';
 import { LanguageSwitcher } from '../../shared/language-switcher/language-switcher';
+import { ThemeToggle } from '../../shared/theme-toggle/theme-toggle';
 import { FieldError } from '../../shared/field-error/field-error';
 
 @Component({
   selector: 'app-login',
-  imports: [
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    TranslateModule,
-    LanguageSwitcher,
-    FieldError,
-  ],
+  imports: [ReactiveFormsModule, TranslateModule, LanguageSwitcher, ThemeToggle, FieldError],
   templateUrl: './login.html',
 })
 export class Login {
@@ -41,6 +25,8 @@ export class Login {
 
   protected readonly demoEmail = DEMO_EMAIL;
   protected readonly demoPassword = DEMO_PASSWORD;
+
+  protected readonly features = ['login.feature1', 'login.feature2', 'login.feature3'];
 
   protected readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],

@@ -1,14 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../core/auth.service';
 import { LanguageSwitcher } from '../shared/language-switcher/language-switcher';
+import { ThemeToggle } from '../shared/theme-toggle/theme-toggle';
 
 @Component({
   selector: 'app-layout',
@@ -16,13 +13,10 @@ import { LanguageSwitcher } from '../shared/language-switcher/language-switcher'
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
     MatTooltipModule,
     TranslateModule,
     LanguageSwitcher,
+    ThemeToggle,
   ],
   templateUrl: './layout.html',
 })
@@ -36,8 +30,10 @@ export class Layout {
 
   protected readonly nav = [
     { link: '/dashboard', icon: 'dashboard', key: 'nav.dashboard' },
+    { link: '/transfers', icon: 'send', key: 'nav.transfers' },
     { link: '/banks', icon: 'account_balance', key: 'nav.banks' },
     { link: '/reports', icon: 'assessment', key: 'nav.reports' },
+    { link: '/settings', icon: 'settings', key: 'nav.settings' },
   ];
 
   protected logout(): void {

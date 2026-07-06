@@ -2,10 +2,10 @@
   <!-- Hero: Balance + Quick actions -->
   <section class="grid grid-cols-1 gap-8 lg:grid-cols-3">
     <!-- Balance card -->
-    <div class="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary shadow-xl lg:col-span-2">
+    <div class="group relative flex min-h-[240px] flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br from-[#00236f] to-[#1e3a8a] p-8 text-white shadow-xl lg:col-span-2">
       <div class="relative z-10 flex items-start justify-between">
         <div>
-          <p class="mb-2 font-body-sm text-body-sm text-on-primary-container opacity-80">
+          <p class="mb-2 font-body-sm text-body-sm text-white/80">
             {{ 'dashboard.balance.available' | translate }}
           </p>
           <h2 class="font-display-lg text-[48px] leading-none tracking-tight">
@@ -165,11 +165,7 @@
                 <div class="flex items-center gap-3">
                   <div
                     class="flex h-10 w-10 items-center justify-center rounded-full"
-                    [class.bg-secondary-container]="t.direction === 'out'"
-                    [class.text-secondary]="t.direction === 'out'"
-                    [class.bg-primary]="t.direction === 'in'"
-                    [class.text-primary]="t.direction === 'neutral'"
-                    [class.bg-surface-dim]="t.direction === 'neutral'">
+                    [class]="txnIconClass(t.direction)">
                     <mat-icon class="!text-xl">{{ t.icon }}</mat-icon>
                   </div>
                   <div>
@@ -193,12 +189,7 @@
                 }
               </td>
               <td class="py-5 text-body-sm text-on-surface-variant">{{ t.typeKey | translate }}</td>
-              <td
-                class="py-5 text-end font-bold"
-                [class.text-error]="t.direction === 'out'"
-                [class.text-primary]="t.direction === 'in'"
-                [class.text-on-surface]="t.direction === 'neutral'"
-                dir="ltr">
+              <td class="py-5 text-end font-bold" [class]="txnAmountClass(t.direction)" dir="ltr">
                 {{ t.direction === 'out' ? '- ' : t.direction === 'in' ? '+ ' : '' }}{{ (t.amount < 0 ? -t.amount : t.amount) | localNumber }} {{ currency }}
               </td>
             </tr>

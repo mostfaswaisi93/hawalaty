@@ -57,6 +57,28 @@ export class Dashboard {
     { party: 'Jasim Abbas', noteKey: 'dashboard.transactions.expenseShare', date: '2026-06-29', status: 'pending', typeKey: 'dashboard.transactions.requestType', amount: 50000, direction: 'neutral', icon: 'group' },
   ];
 
+  protected txnIconClass(direction: Txn['direction']): string {
+    switch (direction) {
+      case 'out':
+        return 'bg-secondary-container/10 text-secondary';
+      case 'in':
+        return 'bg-primary/10 text-primary';
+      default:
+        return 'bg-surface-dim/40 text-on-surface-variant';
+    }
+  }
+
+  protected txnAmountClass(direction: Txn['direction']): string {
+    switch (direction) {
+      case 'out':
+        return 'text-error';
+      case 'in':
+        return 'text-primary';
+      default:
+        return 'text-on-surface';
+    }
+  }
+
   protected newTransfer(): void {
     this.dialog
       .open(TransferDialog, { width: '480px', maxWidth: '95vw' })

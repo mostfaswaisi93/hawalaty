@@ -1,0 +1,52 @@
+import { Component, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalNumberPipe } from '../../core/localize.pipes';
+
+interface Contact {
+  name: string;
+  initials: string;
+}
+
+@Component({
+  selector: 'app-transfers',
+  imports: [FormsModule, TranslateModule, LocalNumberPipe],
+  templateUrl: './transfers.html',
+})
+export class Transfers {
+  private readonly snackbar = inject(MatSnackBar);
+  private readonly translate = inject(TranslateService);
+
+  protected readonly rate = 1310; // 1 USD = 1310 IQD
+  protected readonly availableBalance = 5240;
+  protected readonly transferFee = 12.5;
+  protected readonly serviceFee = 2;
+
+  protected readonly contacts: Contact[] = [
+    { name: 'Yassin Omar', initials: 'YO' },
+    { name: 'Layla Ahmad', initials: 'LA' },
+    { name: 'Ali Hassan', initials: 'AH' },
+    { name: 'Mohammed Jasim', initials: 'MJ' },
+    { name: 'Reem Hamad', initials: 'RH' },
+  ];
+
+  protected readonly selected = signal(2);
+  protected readonly amount = signal(1500);
+  protected readonly note = signal('');
+
+  protected readonly receiverAmount = computed(() => this.amount() * this.rate);
+  protected readonly total = computed(() => this.amount() + this.transferFee + this.serviceFee);
+
+  protected select(index: number): void {
+    this.selected.set(index);
+  }
+
+  protected confirm(): void {
+    this.snackbar.open(
+      this.translate.instant('messages.saveSuccess'),
+      this.translate.instant('common.close'),
+      { duration: 3000 },
+    );
+  }
+}

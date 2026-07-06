@@ -18,12 +18,20 @@ export const routes: Routes = [
         loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),
       },
       {
+        path: 'transfers',
+        loadComponent: () => import('./features/transfers/transfers').then((m) => m.Transfers),
+      },
+      {
         path: 'banks',
         loadComponent: () => import('./features/banks/banks').then((m) => m.Banks),
       },
       {
         path: 'reports',
         loadComponent: () => import('./features/reports/reports').then((m) => m.Reports),
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
       },
     ],
   },
