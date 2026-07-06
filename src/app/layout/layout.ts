@@ -4,6 +4,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../core/auth.service';
+import { LanguageService } from '../core/language.service';
 import { LanguageSwitcher } from '../shared/language-switcher/language-switcher';
 import { ThemeToggle } from '../shared/theme-toggle/theme-toggle';
 
@@ -26,6 +27,8 @@ export class Layout {
   private readonly snackbar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
 
+  /** Direction decides which way the mobile drawer slides off-screen. */
+  protected readonly isRtl = inject(LanguageService).isRtl;
   protected readonly sidebarOpen = signal(false);
 
   protected readonly nav = [

@@ -5,8 +5,10 @@
 
 <!-- Sidebar -->
 <aside
-  class="app-sidebar fixed start-0 top-0 z-50 flex h-screen w-64 flex-col border-e border-outline-variant bg-surface-container-low px-inline-md py-stack-md shadow-sm"
-  [class.is-closed]="!sidebarOpen()">
+  class="fixed start-0 top-0 z-50 flex h-screen w-64 flex-col border-e border-outline-variant bg-surface-container-low px-inline-md py-stack-md shadow-sm transition-transform duration-300 lg:!translate-x-0"
+  [class.translate-x-0]="sidebarOpen()"
+  [class.-translate-x-full]="!sidebarOpen() && !isRtl()"
+  [class.translate-x-full]="!sidebarOpen() && isRtl()">
   <div class="mb-10 px-4">
     <span class="block font-display-lg text-display-lg font-bold text-primary">{{ 'app.name' | translate }}</span>
     <p class="font-body-sm text-body-sm text-on-surface-variant">My Transfers</p>
@@ -74,7 +76,7 @@
         [attr.aria-label]="'nav.menu' | translate">
         <span class="material-symbols-outlined">menu</span>
       </button>
-      <div class="flex w-full max-w-md items-center gap-2 rounded-full bg-surface-container px-4 py-1.5">
+      <div class="hidden w-full max-w-md items-center gap-2 rounded-full bg-surface-container px-4 py-1.5 sm:flex">
         <span class="material-symbols-outlined text-outline">search</span>
         <input
           type="text"

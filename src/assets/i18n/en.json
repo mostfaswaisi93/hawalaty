@@ -14,13 +14,47 @@
   },
   "history": {
     "title": "Transaction History",
-    "subtitle": "Review and filter all your past transactions.",
-    "totalIn": "Total received",
-    "totalOut": "Total sent",
-    "pending": "Pending",
-    "reference": "Reference",
-    "searchPlaceholder": "Search by name or reference...",
-    "empty": "No transactions match your filters"
+    "subtitle": "Track all your past financial transactions with ease.",
+    "exportReport": "Export report",
+    "totalTransfers": "Total transactions (this month)",
+    "vsLastMonth": "vs last month",
+    "timeRange": "Time range",
+    "last30": "Last 30 days",
+    "operationType": "Operation type",
+    "prev": "Previous",
+    "next": "Next",
+    "showing": "Showing {{from}}-{{to}} of {{total}} transactions",
+    "statuses": {
+      "completed": "Completed",
+      "processing": "Processing",
+      "cancelled": "Cancelled"
+    },
+    "types": {
+      "international": "International transfer",
+      "domestic": "Domestic transfer",
+      "autopay": "Auto payment",
+      "cash": "Cash withdrawal"
+    },
+    "subs": {
+      "intlBank": "International bank",
+      "rinCash": "Rin Cash wallet",
+      "bills": "Bill payment",
+      "personal": "Personal transfer",
+      "localBank": "Local bank"
+    },
+    "names": {
+      "john": "John Smith",
+      "asiacell": "Asiacell Telecom",
+      "mohammedAhmed": "Mohammed Ahmed"
+    },
+    "columns": {
+      "recipient": "Recipient",
+      "dateTime": "Date & time",
+      "type": "Operation type",
+      "reference": "Reference",
+      "status": "Status",
+      "amount": "Amount"
+    }
   },
   "forgot": {
     "title": "Reset password",
@@ -60,7 +94,9 @@
     "etaValue": "Within 15-30 minutes to the recipient's account",
     "confirmSend": "Confirm & send",
     "securityTitle": "Full protection",
-    "securityDesc": "All your transactions are encrypted and protected with the highest global security standards."
+    "securityDesc": "All your transactions are encrypted and protected with the highest global security standards.",
+    "promoTitle": "Save 50% on fees",
+    "promoDesc": "Use code FIRST50 on your first transfer this month."
   },
   "settings": {
     "verifiedAccount": "Verified Account",
@@ -214,8 +250,22 @@
       "title": "Scheduled transfers",
       "viewAll": "View all",
       "dueLabel": "Due",
+      "tomorrow": "Tomorrow",
       "rent": "Office rent - monthly",
       "utilities": "Utilities bill"
+    },
+    "parties": {
+      "sara": "Sara Ali",
+      "electricity": "Electricity Company",
+      "amazon": "Amazon Global",
+      "rafidain": "Rafidain Bank",
+      "jasim": "Jasim Abbas",
+      "ali": "Ali Hassan",
+      "emirates": "Emirates NBD",
+      "reem": "Reem Hamad",
+      "mohammed": "Mohammed Jasim",
+      "layla": "Layla Ahmad",
+      "yassin": "Yassin Omar"
     },
     "insights": {
       "title": "Spending insights",

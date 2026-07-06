@@ -5,7 +5,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalNumberPipe } from '../../core/localize.pipes';
 
 interface Contact {
-  name: string;
+  nameKey: string;
   initials: string;
 }
 
@@ -24,11 +24,11 @@ export class Transfers {
   protected readonly serviceFee = 2;
 
   protected readonly contacts: Contact[] = [
-    { name: 'Yassin Omar', initials: 'YO' },
-    { name: 'Layla Ahmad', initials: 'LA' },
-    { name: 'Ali Hassan', initials: 'AH' },
-    { name: 'Mohammed Jasim', initials: 'MJ' },
-    { name: 'Reem Hamad', initials: 'RH' },
+    { nameKey: 'dashboard.parties.reem', initials: 'RH' },
+    { nameKey: 'dashboard.parties.mohammed', initials: 'MJ' },
+    { nameKey: 'dashboard.parties.ali', initials: 'AH' },
+    { nameKey: 'dashboard.parties.layla', initials: 'LA' },
+    { nameKey: 'dashboard.parties.yassin', initials: 'YO' },
   ];
 
   protected readonly selected = signal(2);

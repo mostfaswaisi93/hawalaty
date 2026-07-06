@@ -37,21 +37,23 @@
             <span class="font-body-sm text-xs">{{ 'transfers.new' | translate }}</span>
           </button>
 
-          @for (c of contacts; track c.name; let i = $index) {
+          @for (c of contacts; track c.nameKey; let i = $index) {
             <button type="button" class="group flex min-w-[80px] cursor-pointer flex-col items-center gap-2" (click)="select(i)">
               <div
-                class="grid h-14 w-14 place-items-center rounded-full border-2 font-bold text-on-primary-container transition-all"
+                class="grid h-14 w-14 place-items-center rounded-full border-2 font-bold transition-all"
                 [class.bg-surface-container-high]="selected() !== i"
+                [class.text-on-surface-variant]="selected() !== i"
                 [class.border-transparent]="selected() !== i"
                 [class.group-hover:border-primary]="selected() !== i"
-                [class.bg-primary-container]="selected() === i"
+                [class.bg-primary]="selected() === i"
+                [class.text-white]="selected() === i"
                 [class.border-primary]="selected() === i"
                 [class.ring-4]="selected() === i"
                 [class.ring-primary/10]="selected() === i">
                 {{ c.initials }}
               </div>
-              <span class="text-center font-body-sm text-xs" [class.font-bold]="selected() === i" [class.text-primary]="selected() === i" [class.font-semibold]="selected() !== i">
-                {{ c.name }}
+              <span class="whitespace-nowrap text-center font-body-sm text-xs" [class.font-bold]="selected() === i" [class.text-primary]="selected() === i" [class.font-semibold]="selected() !== i">
+                {{ c.nameKey | translate }}
               </span>
             </button>
           }
@@ -69,15 +71,16 @@
                 type="number"
                 [ngModel]="amount()"
                 (ngModelChange)="amount.set($event || 0)"
-                class="w-full rounded-xl border-2 border-outline-variant py-4 pe-4 ps-24 font-numeral-lg text-display-lg outline-none transition-all focus:border-primary" />
-              <div class="absolute inset-y-0 start-0 flex items-center">
-                <div class="flex h-full items-center gap-2 rounded-s-xl border-e border-outline-variant bg-surface-container px-4">
+                class="w-full rounded-xl border-2 border-outline-variant py-4 pe-24 ps-4 font-numeral-lg text-display-lg outline-none transition-all focus:border-primary" />
+              <div class="absolute inset-y-0 end-0 flex items-center">
+                <button type="button" class="flex h-full items-center gap-2 rounded-e-xl border-s border-outline-variant bg-surface-container px-4 transition-colors hover:bg-surface-container-high">
                   <span class="font-bold text-primary">USD</span>
-                </div>
+                  <span class="material-symbols-outlined text-sm">expand_more</span>
+                </button>
               </div>
             </div>
             <p class="mt-1 text-xs text-on-surface-variant">
-              {{ 'transfers.availableBalance' | translate }}: {{ availableBalance | localNumber: { minimumFractionDigits: 2 } }} USD
+              {{ 'transfers.availableBalance' | translate }}: <span dir="ltr">${{ availableBalance | localNumber: { minimumFractionDigits: 2 } }}</span>
             </p>
           </div>
 
@@ -88,9 +91,9 @@
                 type="text"
                 [value]="receiverAmount() | localNumber"
                 disabled
-                class="w-full rounded-xl border-2 border-surface-container-high bg-surface-container-low py-4 pe-4 ps-24 font-numeral-lg text-display-lg text-on-surface-variant outline-none" />
-              <div class="absolute inset-y-0 start-0 flex items-center">
-                <div class="flex h-full items-center gap-2 rounded-s-xl border-e border-outline-variant bg-surface-container/50 px-4">
+                class="w-full rounded-xl border-2 border-surface-container-high bg-surface-container-low py-4 pe-24 ps-4 font-numeral-lg text-display-lg text-on-surface-variant outline-none" />
+              <div class="absolute inset-y-0 end-0 flex items-center">
+                <div class="flex h-full items-center gap-2 rounded-e-xl border-s border-outline-variant bg-surface-container/50 px-4">
                   <span class="font-bold text-on-surface-variant">IQD</span>
                 </div>
               </div>
@@ -124,19 +127,19 @@
         <div class="mb-8 space-y-4">
           <div class="flex items-center justify-between opacity-80">
             <span class="font-body-sm">{{ 'transfers.baseAmount' | translate }}</span>
-            <span class="font-numeral-lg text-lg" dir="ltr">{{ amount() | localNumber: { minimumFractionDigits: 2 } }} USD</span>
+            <span class="font-numeral-lg text-lg" dir="ltr">${{ amount() | localNumber: { minimumFractionDigits: 2 } }}</span>
           </div>
           <div class="flex items-center justify-between opacity-80">
             <span class="font-body-sm">{{ 'transfers.transferFee' | translate }}</span>
-            <span class="font-numeral-lg text-lg" dir="ltr">{{ transferFee | localNumber: { minimumFractionDigits: 2 } }} USD</span>
+            <span class="font-numeral-lg text-lg" dir="ltr">${{ transferFee | localNumber: { minimumFractionDigits: 2 } }}</span>
           </div>
           <div class="flex items-center justify-between opacity-80">
             <span class="font-body-sm">{{ 'transfers.serviceFee' | translate }}</span>
-            <span class="font-numeral-lg text-lg" dir="ltr">{{ serviceFee | localNumber: { minimumFractionDigits: 2 } }} USD</span>
+            <span class="font-numeral-lg text-lg" dir="ltr">${{ serviceFee | localNumber: { minimumFractionDigits: 2 } }}</span>
           </div>
           <div class="flex items-center justify-between border-t border-white/20 pt-4">
             <span class="font-body-lg font-bold">{{ 'transfers.totalDue' | translate }}</span>
-            <span class="font-numeral-lg text-2xl text-secondary-container" dir="ltr">{{ total() | localNumber: { minimumFractionDigits: 2 } }} USD</span>
+            <span class="font-numeral-lg text-2xl text-secondary-container" dir="ltr">${{ total() | localNumber: { minimumFractionDigits: 2 } }}</span>
           </div>
         </div>
 
@@ -161,12 +164,22 @@
 
       <!-- Security badge -->
       <div class="flex items-center gap-4 rounded-2xl border border-outline-variant bg-surface-container-high p-6">
-        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-sm">
+        <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-primary shadow-sm">
           <span class="material-symbols-outlined" data-weight="fill">verified_user</span>
         </div>
         <div>
           <p class="text-sm font-bold">{{ 'transfers.securityTitle' | translate }}</p>
           <p class="text-xs text-on-surface-variant">{{ 'transfers.securityDesc' | translate }}</p>
+        </div>
+      </div>
+
+      <!-- Promo card -->
+      <div class="group relative h-40 cursor-pointer overflow-hidden rounded-2xl bg-gradient-to-br from-[#00236f] to-[#1e3a8a] shadow-lg">
+        <div class="pointer-events-none absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 3px 3px, white 1px, transparent 0); background-size: 22px 22px;"></div>
+        <div class="pointer-events-none absolute -end-8 -top-8 h-28 w-28 rounded-full bg-secondary-container/30 blur-2xl transition-transform duration-700 group-hover:scale-125"></div>
+        <div class="absolute inset-x-5 bottom-5">
+          <p class="text-sm font-bold text-white">{{ 'transfers.promoTitle' | translate }}</p>
+          <p class="mt-1 text-xs text-white/70">{{ 'transfers.promoDesc' | translate }}</p>
         </div>
       </div>
     </div>
