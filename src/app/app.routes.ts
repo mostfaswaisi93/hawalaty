@@ -8,6 +8,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/login').then((m) => m.Login),
   },
   {
+    path: 'forgot-password',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./features/auth/forgot-password').then((m) => m.ForgotPassword),
+  },
+  {
     path: '',
     loadComponent: () => import('./layout/layout').then((m) => m.Layout),
     canActivate: [authGuard],
@@ -20,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'transfers',
         loadComponent: () => import('./features/transfers/transfers').then((m) => m.Transfers),
+      },
+      {
+        path: 'history',
+        loadComponent: () => import('./features/history/history').then((m) => m.History),
       },
       {
         path: 'banks',
@@ -35,5 +44,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    loadComponent: () => import('./features/errors/not-found').then((m) => m.NotFound),
+  },
 ];

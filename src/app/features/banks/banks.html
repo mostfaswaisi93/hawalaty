@@ -1,100 +1,104 @@
-<section class="mx-auto max-w-6xl">
+<div class="space-y-8">
   <!-- Header -->
-  <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+  <div class="flex flex-wrap items-center justify-between gap-3">
     <div>
-      <h1 class="text-2xl font-bold">{{ 'banks.title' | translate }}</h1>
-      <p class="text-sm opacity-70">{{ 'banks.subtitle' | translate }}</p>
+      <h1 class="font-display-lg text-display-lg text-primary">{{ 'banks.title' | translate }}</h1>
+      <p class="font-body-lg text-on-surface-variant">{{ 'banks.subtitle' | translate }}</p>
     </div>
-    <button mat-flat-button color="primary" (click)="openDialog()">
-      <mat-icon>add</mat-icon>
-      <span class="mx-1">{{ 'banks.addBank' | translate }}</span>
+    <button
+      type="button"
+      (click)="openDialog()"
+      class="flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-bold text-on-primary shadow-lg transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-95">
+      <span class="material-symbols-outlined">add</span>
+      <span>{{ 'banks.addBank' | translate }}</span>
     </button>
   </div>
 
-  <mat-card class="!rounded-2xl">
-    <!-- Toolbar: search + count -->
-    <div class="flex flex-wrap items-center justify-between gap-3 p-4">
-      <mat-form-field appearance="outline" class="w-full sm:w-80" subscriptSizing="dynamic">
-        <mat-icon matPrefix class="opacity-60">search</mat-icon>
+  <!-- Table card -->
+  <div class="tonal-elevation rounded-3xl border border-outline-variant bg-surface-container-lowest p-6">
+    <!-- Toolbar -->
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex w-full items-center gap-2 rounded-full bg-surface-container px-4 py-2 sm:w-80">
+        <span class="material-symbols-outlined text-outline">search</span>
         <input
-          matInput
+          type="text"
           [ngModel]="query()"
           (ngModelChange)="query.set($event)"
-          [placeholder]="'banks.searchPlaceholder' | translate" />
-      </mat-form-field>
-      <span class="text-sm opacity-60">{{ 'banks.count' | translate: { count: filtered().length } }}</span>
+          [placeholder]="'banks.searchPlaceholder' | translate"
+          class="w-full border-none bg-transparent text-body-sm outline-none focus:ring-0" />
+      </div>
+      <span class="text-body-sm text-on-surface-variant">{{ 'banks.count' | translate: { count: filtered().length } }}</span>
     </div>
 
+    <!-- Table -->
     <div class="overflow-x-auto">
-      <table mat-table [dataSource]="filtered()" class="w-full">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>{{ 'banks.columns.name' | translate }}</th>
-          <td mat-cell *matCellDef="let b">
-            <div class="flex items-center gap-3 py-1">
-              <div class="grid h-9 w-9 place-items-center rounded-lg bg-sky-100 text-sky-700">
-                <mat-icon class="!h-5 !w-5 !text-[20px] leading-5">account_balance</mat-icon>
-              </div>
-              <span class="font-medium">{{ b.name }}</span>
-            </div>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="code">
-          <th mat-header-cell *matHeaderCellDef>{{ 'banks.columns.code' | translate }}</th>
-          <td mat-cell *matCellDef="let b">{{ b.code }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="country">
-          <th mat-header-cell *matHeaderCellDef>{{ 'banks.columns.country' | translate }}</th>
-          <td mat-cell *matCellDef="let b">{{ b.country }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="swift">
-          <th mat-header-cell *matHeaderCellDef>{{ 'banks.columns.swift' | translate }}</th>
-          <td mat-cell *matCellDef="let b"><span dir="ltr">{{ b.swift }}</span></td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>{{ 'banks.columns.status' | translate }}</th>
-          <td mat-cell *matCellDef="let b">
-            <span
-              class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium"
-              [class.bg-green-100]="b.active"
-              [class.text-green-700]="b.active"
-              [class.bg-slate-100]="!b.active"
-              [class.text-slate-500]="!b.active">
-              <span class="h-1.5 w-1.5 rounded-full" [class.bg-green-500]="b.active" [class.bg-slate-400]="!b.active"></span>
-              {{ (b.active ? 'banks.status.active' : 'banks.status.inactive') | translate }}
-            </span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>{{ 'common.actions' | translate }}</th>
-          <td mat-cell *matCellDef="let b">
-            <button
-              mat-icon-button
-              [matTooltip]="'common.edit' | translate"
-              (click)="openDialog(b)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              color="warn"
-              [matTooltip]="'common.delete' | translate"
-              (click)="remove(b)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-outline-variant/30 text-outline">
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'banks.columns.name' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'banks.columns.code' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'banks.columns.country' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'banks.columns.swift' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-start font-label-caps text-[11px] uppercase tracking-wider">{{ 'banks.columns.status' | translate }}</th>
+            <th class="whitespace-nowrap pb-4 text-end font-label-caps text-[11px] uppercase tracking-wider">{{ 'common.actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/20">
+          @for (b of filtered(); track b.id) {
+            <tr class="transition-colors hover:bg-surface-container-low/50">
+              <td class="py-4">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-xl">account_balance</span>
+                  </div>
+                  <span class="whitespace-nowrap font-bold">{{ b.name }}</span>
+                </div>
+              </td>
+              <td class="whitespace-nowrap py-4 text-body-sm text-on-surface-variant" dir="ltr">{{ b.code }}</td>
+              <td class="whitespace-nowrap py-4 text-body-sm text-on-surface-variant">{{ b.country }}</td>
+              <td class="whitespace-nowrap py-4 font-mono text-body-sm text-on-surface-variant" dir="ltr">{{ b.swift }}</td>
+              <td class="py-4">
+                <span
+                  class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-bold"
+                  [class.bg-green-100]="b.active"
+                  [class.text-green-700]="b.active"
+                  [class.dark:bg-green-500/15]="b.active"
+                  [class.dark:text-green-300]="b.active"
+                  [class.bg-surface-container-high]="!b.active"
+                  [class.text-on-surface-variant]="!b.active">
+                  <span class="h-1.5 w-1.5 rounded-full" [class.bg-green-500]="b.active" [class.bg-outline]="!b.active"></span>
+                  {{ (b.active ? 'banks.status.active' : 'banks.status.inactive') | translate }}
+                </span>
+              </td>
+              <td class="py-4">
+                <div class="flex items-center justify-end gap-1">
+                  <button
+                    type="button"
+                    (click)="openDialog(b)"
+                    [attr.aria-label]="'common.edit' | translate"
+                    class="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-primary">
+                    <span class="material-symbols-outlined text-xl">edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    (click)="remove(b)"
+                    [attr.aria-label]="'common.delete' | translate"
+                    class="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-error-container hover:text-error">
+                    <span class="material-symbols-outlined text-xl">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
       </table>
 
       @if (filtered().length === 0) {
-        <p class="p-8 text-center opacity-60">{{ 'banks.empty' | translate }}</p>
+        <div class="flex flex-col items-center gap-3 py-16 text-center">
+          <span class="material-symbols-outlined text-5xl text-outline/50">account_balance</span>
+          <p class="text-on-surface-variant">{{ 'banks.empty' | translate }}</p>
+        </div>
       }
     </div>
-  </mat-card>
-</section>
+  </div>
+</div>

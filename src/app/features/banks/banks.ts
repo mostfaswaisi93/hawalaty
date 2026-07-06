@@ -1,14 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Bank, MOCK_BANKS } from '../../data/banks';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
@@ -16,17 +9,7 @@ import { BankDialog } from './bank-dialog';
 
 @Component({
   selector: 'app-banks',
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatTableModule,
-    MatTooltipModule,
-    TranslateModule,
-  ],
+  imports: [FormsModule, TranslateModule],
   templateUrl: './banks.html',
 })
 export class Banks {
@@ -36,7 +19,6 @@ export class Banks {
 
   protected readonly banks = signal<Bank[]>([...MOCK_BANKS]);
   protected readonly query = signal('');
-  protected readonly columns = ['name', 'code', 'country', 'swift', 'status', 'actions'];
 
   protected readonly filtered = computed(() => {
     const q = this.query().trim().toLowerCase();

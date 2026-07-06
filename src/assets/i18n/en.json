@@ -6,10 +6,35 @@
   "nav": {
     "dashboard": "Dashboard",
     "transfers": "Transfers",
+    "history": "History",
     "banks": "Banks",
     "reports": "Reports",
     "settings": "Settings",
     "menu": "Menu"
+  },
+  "history": {
+    "title": "Transaction History",
+    "subtitle": "Review and filter all your past transactions.",
+    "totalIn": "Total received",
+    "totalOut": "Total sent",
+    "pending": "Pending",
+    "reference": "Reference",
+    "searchPlaceholder": "Search by name or reference...",
+    "empty": "No transactions match your filters"
+  },
+  "forgot": {
+    "title": "Reset password",
+    "subtitle": "Enter your email and we'll send you a reset link.",
+    "submit": "Send reset link",
+    "sending": "Sending...",
+    "sentTitle": "Check your inbox",
+    "sentText": "We've sent a password reset link to",
+    "backToLogin": "Back to login"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to dashboard"
   },
   "transfers": {
     "title": "Send new money",

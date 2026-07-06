@@ -31,6 +31,7 @@ export class Layout {
   protected readonly nav = [
     { link: '/dashboard', icon: 'dashboard', key: 'nav.dashboard' },
     { link: '/transfers', icon: 'send', key: 'nav.transfers' },
+    { link: '/history', icon: 'history', key: 'nav.history' },
     { link: '/banks', icon: 'account_balance', key: 'nav.banks' },
     { link: '/reports', icon: 'assessment', key: 'nav.reports' },
     { link: '/settings', icon: 'settings', key: 'nav.settings' },

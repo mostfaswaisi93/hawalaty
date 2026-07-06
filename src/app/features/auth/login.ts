@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService, DEMO_EMAIL, DEMO_PASSWORD } from '../../core/auth.service';
@@ -10,7 +10,7 @@ import { FieldError } from '../../shared/field-error/field-error';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, TranslateModule, LanguageSwitcher, ThemeToggle, FieldError],
+  imports: [ReactiveFormsModule, RouterLink, TranslateModule, LanguageSwitcher, ThemeToggle, FieldError],
   templateUrl: './login.html',
 })
 export class Login {
