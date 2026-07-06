@@ -7,7 +7,7 @@
     "dashboard": "Dashboard",
     "transfers": "Transfers",
     "history": "History",
-    "banks": "Banks",
+    "banks": "Banks & Wallets",
     "catalog": "Products & Services",
     "reports": "Reports",
     "settings": "Settings",
@@ -294,15 +294,20 @@
     }
   },
   "banks": {
-    "title": "Banks",
-    "subtitle": "Manage the banks available for transfers",
-    "addBank": "Add Bank",
-    "editBank": "Edit Bank",
-    "searchPlaceholder": "Search banks...",
-    "count": "{{count}} banks",
-    "empty": "No banks found",
+    "title": "Banks & Wallets",
+    "subtitle": "Manage the banks and digital wallets available for transfers",
+    "addEntity": "Add Bank / Wallet",
+    "editEntity": "Edit Bank / Wallet",
+    "searchPlaceholder": "Search banks or wallets...",
+    "count": "{{count}} entries",
+    "empty": "No banks or wallets found",
+    "types": {
+      "bank": "Bank",
+      "wallet": "Wallet"
+    },
     "columns": {
-      "name": "Bank name",
+      "name": "Name",
+      "type": "Type",
       "code": "Code",
       "country": "Country",
       "swift": "SWIFT / BIC",
@@ -313,19 +318,20 @@
       "inactive": "Inactive"
     },
     "form": {
-      "name": "Bank name",
-      "namePlaceholder": "e.g. National Bank",
-      "code": "Bank code",
+      "type": "Type",
+      "name": "Name",
+      "namePlaceholder": "e.g. National Bank or Jawwal Pay",
+      "code": "Code",
       "codePlaceholder": "e.g. NBK",
       "country": "Country",
       "swift": "SWIFT / BIC",
       "swiftPlaceholder": "e.g. NBKKWKWXXX",
       "active": "Active"
     },
-    "deleteConfirmTitle": "Delete bank",
-    "deleteConfirmText": "Are you sure you want to delete this bank?",
-    "saveSuccess": "Bank saved successfully",
-    "deleteSuccess": "Bank deleted successfully"
+    "deleteConfirmTitle": "Delete entry",
+    "deleteConfirmText": "Are you sure you want to delete this bank or wallet?",
+    "saveSuccess": "Saved successfully",
+    "deleteSuccess": "Deleted successfully"
   },
   "catalog": {
     "title": "Products & Services",

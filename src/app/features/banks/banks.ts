@@ -3,9 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Bank, MOCK_BANKS } from '../../data/banks';
+import { Bank, BankEntityType, MOCK_BANKS } from '../../data/banks';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 import { BankDialog } from './bank-dialog';
+
+type TypeFilter = 'all' | BankEntityType;
 
 @Component({
   selector: 'app-banks',
@@ -19,14 +21,22 @@ export class Banks {
 
   protected readonly banks = signal<Bank[]>([...MOCK_BANKS]);
   protected readonly query = signal('');
+  protected readonly type = signal<TypeFilter>('all');
+  protected readonly types: TypeFilter[] = ['all', 'bank', 'wallet'];
 
   protected readonly filtered = computed(() => {
     const q = this.query().trim().toLowerCase();
-    if (!q) return this.banks();
-    return this.banks().filter((b) =>
-      [b.name, b.code, b.country, b.swift].some((f) => f.toLowerCase().includes(q)),
-    );
+    const t = this.type();
+    return this.banks().filter((b) => {
+      const okType = t === 'all' || b.type === t;
+      const okQuery = !q || [b.name, b.code, b.country, b.swift ?? ''].some((f) => f.toLowerCase().includes(q));
+      return okType && okQuery;
+    });
   });
+
+  protected setType(t: TypeFilter): void {
+    this.type.set(t);
+  }
 
   protected openDialog(bank?: Bank): void {
     this.dialog
@@ -60,6 +70,10 @@ export class Banks {
         this.banks.update((list) => list.filter((b) => b.id !== bank.id));
         this.notify('banks.deleteSuccess');
       });
+  }
+
+  protected typeIcon(type: BankEntityType): string {
+    return type === 'bank' ? 'account_balance' : 'account_balance_wallet';
   }
 
   private notify(key: string): void {

@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
-import { Bank, COUNTRIES } from '../../data/banks';
+import { Bank, BankEntityType, COUNTRIES } from '../../data/banks';
 import { FieldError } from '../../shared/field-error/field-error';
 
 @Component({
@@ -25,11 +25,19 @@ import { FieldError } from '../../shared/field-error/field-error';
   ],
   template: `
     <h2 mat-dialog-title>
-      {{ (data ? 'banks.editBank' : 'banks.addBank') | translate }}
+      {{ (data ? 'banks.editEntity' : 'banks.addEntity') | translate }}
     </h2>
 
     <mat-dialog-content>
       <form [formGroup]="form" class="flex flex-col gap-2 pt-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'banks.form.type' | translate }}</mat-label>
+          <mat-select formControlName="type" (selectionChange)="onTypeChange($event.value)">
+            <mat-option value="bank">{{ 'banks.types.bank' | translate }}</mat-option>
+            <mat-option value="wallet">{{ 'banks.types.wallet' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>{{ 'banks.form.name' | translate }}</mat-label>
           <input matInput formControlName="name" [placeholder]="'banks.form.namePlaceholder' | translate" />
@@ -52,11 +60,13 @@ import { FieldError } from '../../shared/field-error/field-error';
         </div>
         <app-field-error [control]="form.controls.code" />
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'banks.form.swift' | translate }}</mat-label>
-          <input matInput formControlName="swift" [placeholder]="'banks.form.swiftPlaceholder' | translate" />
-        </mat-form-field>
-        <app-field-error [control]="form.controls.swift" />
+        @if (form.controls.type.value === 'bank') {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'banks.form.swift' | translate }}</mat-label>
+            <input matInput formControlName="swift" [placeholder]="'banks.form.swiftPlaceholder' | translate" />
+          </mat-form-field>
+          <app-field-error [control]="form.controls.swift" />
+        }
 
         <mat-slide-toggle formControlName="active" class="mt-1">
           {{ 'banks.form.active' | translate }}
@@ -78,12 +88,25 @@ export class BankDialog {
   protected readonly countries = COUNTRIES;
 
   protected readonly form = this.fb.nonNullable.group({
+    type: [this.data?.type ?? ('bank' as BankEntityType), Validators.required],
     name: [this.data?.name ?? '', [Validators.required, Validators.minLength(2)]],
     code: [this.data?.code ?? '', [Validators.required, Validators.minLength(2)]],
-    country: [this.data?.country ?? 'SA', Validators.required],
-    swift: [this.data?.swift ?? '', [Validators.required, Validators.minLength(8)]],
+    country: [this.data?.country ?? 'PS', Validators.required],
+    swift: [this.data?.swift ?? '', this.data?.type === 'wallet' ? [] : [Validators.required, Validators.minLength(8)]],
     active: [this.data?.active ?? true],
   });
+
+  /** SWIFT is only meaningful (and required) for banks — wallets don't have one. */
+  protected onTypeChange(type: BankEntityType): void {
+    const swiftControl = this.form.controls.swift;
+    if (type === 'wallet') {
+      swiftControl.clearValidators();
+      swiftControl.setValue('');
+    } else {
+      swiftControl.setValidators([Validators.required, Validators.minLength(8)]);
+    }
+    swiftControl.updateValueAndValidity();
+  }
 
   protected submit(): void {
     if (this.form.invalid) {
@@ -92,8 +115,13 @@ export class BankDialog {
     }
     const v = this.form.getRawValue();
     const result: Bank = {
-      id: this.data?.id ?? 'BNK-' + Math.floor(10 + Math.random() * 89),
-      ...v,
+      id: this.data?.id ?? (v.type === 'wallet' ? 'WLT-' : 'BNK-') + Math.floor(10 + Math.random() * 89),
+      type: v.type,
+      name: v.name,
+      code: v.code,
+      country: v.country,
+      swift: v.type === 'bank' ? v.swift : undefined,
+      active: v.active,
     };
     this.ref.close(result);
   }
