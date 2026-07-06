@@ -92,7 +92,7 @@ export class ItemDialog {
     type: [this.data?.type ?? ('service' as CatalogType), Validators.required],
     category: [this.data?.category ?? '', [Validators.required, Validators.minLength(2)]],
     price: [this.data?.price ?? null as number | null, [Validators.required, Validators.min(0.01)]],
-    currency: [this.data?.currency ?? 'USD', Validators.required],
+    currency: [this.data?.currency ?? 'ILS', Validators.required],
     active: [this.data?.active ?? true],
   });
 

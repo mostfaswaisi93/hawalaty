@@ -12,11 +12,12 @@ export interface Transfer {
 }
 
 export const MOCK_TRANSFERS: Transfer[] = [
-  { id: 'TRX-1001', customer: 'Ahmad Ali', amount: 1250.5, currency: 'USD', date: '2026-07-01', status: 'completed', itemName: 'Laptop - Dell XPS 13' },
-  { id: 'TRX-1002', customer: 'Sara Youssef', amount: 890, currency: 'EUR', date: '2026-07-02', status: 'pending' },
+  { id: 'TRX-1001', customer: 'Ahmad Ali', amount: 1250.5, currency: 'USD', date: '2026-07-01', status: 'completed', itemName: 'بيتزا مارغريتا' },
+  { id: 'TRX-1002', customer: 'Sara Youssef', amount: 890, currency: 'ILS', date: '2026-07-02', status: 'pending' },
   { id: 'TRX-1003', customer: 'Omar Khalid', amount: 3400.75, currency: 'USD', date: '2026-07-03', status: 'completed' },
-  { id: 'TRX-1004', customer: 'Layla Hassan', amount: 560.25, currency: 'GBP', date: '2026-07-04', status: 'failed', itemName: 'Consulting Session' },
+  { id: 'TRX-1004', customer: 'Layla Hassan', amount: 560.25, currency: 'ILS', date: '2026-07-04', status: 'failed', itemName: 'كالزوني باللحم' },
   { id: 'TRX-1005', customer: 'Kareem Nabil', amount: 2100, currency: 'USD', date: '2026-07-05', status: 'pending' },
 ];
 
-export const CURRENCIES = ['USD', 'EUR', 'GBP', 'SAR', 'AED'];
+/** The platform only supports Shekel and Dollar — by explicit business decision, no other currencies. */
+export const CURRENCIES = ['ILS', 'USD'];

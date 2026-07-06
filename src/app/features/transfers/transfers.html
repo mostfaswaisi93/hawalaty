@@ -94,12 +94,12 @@
                 class="w-full rounded-xl border-2 border-surface-container-high bg-surface-container-low py-4 pe-24 ps-4 font-numeral-lg text-display-lg text-on-surface-variant outline-none" />
               <div class="absolute inset-y-0 end-0 flex items-center">
                 <div class="flex h-full items-center gap-2 rounded-e-xl border-s border-outline-variant bg-surface-container/50 px-4">
-                  <span class="font-bold text-on-surface-variant">IQD</span>
+                  <span class="font-bold text-on-surface-variant">ILS</span>
                 </div>
               </div>
             </div>
             <p class="mt-1 text-xs font-bold text-secondary">
-              {{ 'transfers.exchangeRate' | translate }}: 1 USD = {{ rate | localNumber }} IQD
+              {{ 'transfers.exchangeRate' | translate }}: 1 USD = {{ rate | localNumber: { minimumFractionDigits: 2 } }} ILS
             </p>
           </div>
         </div>

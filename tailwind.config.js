@@ -57,6 +57,9 @@ module.exports = {
         error: c('error'),
         'on-primary': c('on-primary'),
         'tertiary-container': c('tertiary-container'),
+        // Restaurant brand accent (بيت التميس logo maroon) — used on the Catalog/menu page only.
+        brand: c('brand'),
+        'on-brand': c('on-brand'),
       },
       borderRadius: {
         DEFAULT: '0.25rem',

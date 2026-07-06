@@ -18,7 +18,7 @@ export class Transfers {
   private readonly snackbar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
 
-  protected readonly rate = 1310; // 1 USD = 1310 IQD
+  protected readonly rate = 3.7; // 1 USD = 3.70 ILS
   protected readonly availableBalance = 5240;
   protected readonly transferFee = 12.5;
   protected readonly serviceFee = 2;

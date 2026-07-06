@@ -38,23 +38,23 @@ export class Dashboard {
   private readonly snackbar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
 
-  protected readonly currency = 'IQD';
+  protected readonly currency = 'ILS';
   protected readonly balance = 12450.0;
   protected readonly accountTail = '8824';
-  protected readonly monthlySpending = 4120000;
+  protected readonly monthlySpending = 4120;
 
   protected readonly bars = [40, 65, 85, 50, 30];
   protected readonly days = ['sat', 'sun', 'mon', 'tue', 'wed'];
 
   protected readonly scheduled: ScheduledItem[] = [
-    { nameKey: 'dashboard.parties.sara', noteKey: 'dashboard.scheduled.rent', amount: 500000, dueDate: '2023-10-25', icon: 'person' },
-    { nameKey: 'dashboard.parties.electricity', noteKey: 'dashboard.scheduled.utilities', amount: 75250, dueKey: 'dashboard.scheduled.tomorrow', icon: 'bolt' },
+    { nameKey: 'dashboard.parties.sara', noteKey: 'dashboard.scheduled.rent', amount: 500, dueDate: '2023-10-25', icon: 'person' },
+    { nameKey: 'dashboard.parties.electricity', noteKey: 'dashboard.scheduled.utilities', amount: 75, dueKey: 'dashboard.scheduled.tomorrow', icon: 'bolt' },
   ];
 
   protected readonly transactions: Txn[] = [
-    { nameKey: 'dashboard.parties.amazon', noteKey: 'dashboard.transactions.online', date: '2023-10-20', status: 'completed', typeKey: 'dashboard.transactions.direct', amount: -145000, direction: 'out', icon: 'shopping_bag' },
-    { nameKey: 'dashboard.parties.rafidain', noteKey: 'dashboard.transactions.incoming', date: '2023-10-18', status: 'completed', typeKey: 'dashboard.transactions.bankTransfer', amount: 2500000, direction: 'in', icon: 'account_balance' },
-    { nameKey: 'dashboard.parties.jasim', noteKey: 'dashboard.transactions.expenseShare', date: '2023-10-15', status: 'pending', typeKey: 'dashboard.transactions.requestType', amount: 50000, direction: 'neutral', icon: 'person' },
+    { nameKey: 'dashboard.parties.amazon', noteKey: 'dashboard.transactions.online', date: '2023-10-20', status: 'completed', typeKey: 'dashboard.transactions.direct', amount: -145, direction: 'out', icon: 'shopping_bag' },
+    { nameKey: 'dashboard.parties.rafidain', noteKey: 'dashboard.transactions.incoming', date: '2023-10-18', status: 'completed', typeKey: 'dashboard.transactions.bankTransfer', amount: 2500, direction: 'in', icon: 'account_balance' },
+    { nameKey: 'dashboard.parties.jasim', noteKey: 'dashboard.transactions.expenseShare', date: '2023-10-15', status: 'pending', typeKey: 'dashboard.transactions.requestType', amount: 50, direction: 'neutral', icon: 'person' },
   ];
 
   protected txnIconClass(direction: Txn['direction']): string {

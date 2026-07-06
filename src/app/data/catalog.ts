@@ -11,9 +11,11 @@ export interface CatalogItem {
 }
 
 export const MOCK_CATALOG: CatalogItem[] = [
-  { id: 'ITM-01', name: 'Mobile Phone Repair', type: 'service', category: 'Electronics', price: 45, currency: 'USD', active: true },
-  { id: 'ITM-02', name: 'Grocery Package', type: 'good', category: 'Groceries', price: 60, currency: 'USD', active: true },
-  { id: 'ITM-03', name: 'Consulting Session', type: 'service', category: 'Consulting', price: 120, currency: 'USD', active: true },
-  { id: 'ITM-04', name: 'Laptop - Dell XPS 13', type: 'good', category: 'Electronics', price: 950, currency: 'USD', active: true },
-  { id: 'ITM-05', name: 'Home Cleaning Service', type: 'service', category: 'Home Services', price: 35, currency: 'USD', active: false },
+  { id: 'ITM-01', name: 'بيتزا مارغريتا', type: 'good', category: 'بيتزا', price: 45, currency: 'ILS', active: true },
+  { id: 'ITM-02', name: 'بيتزا ببروني', type: 'good', category: 'بيتزا', price: 50, currency: 'ILS', active: true },
+  { id: 'ITM-03', name: 'كالزوني باللحم', type: 'good', category: 'كالزوني', price: 40, currency: 'ILS', active: true },
+  { id: 'ITM-04', name: 'كالزوني بالجبن', type: 'good', category: 'كالزوني', price: 35, currency: 'ILS', active: true },
+  { id: 'ITM-05', name: 'تميس تقليدي', type: 'good', category: 'تميس', price: 8, currency: 'ILS', active: true },
+  { id: 'ITM-06', name: 'تميس بالجبن', type: 'good', category: 'تميس', price: 12, currency: 'ILS', active: true },
+  { id: 'ITM-07', name: 'طلب مناسبات (كيترينغ)', type: 'service', category: 'خدمات', price: 500, currency: 'ILS', active: true },
 ];

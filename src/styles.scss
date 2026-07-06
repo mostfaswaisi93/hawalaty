@@ -56,6 +56,11 @@
   --c-error: 186 26 26;
   --c-on-primary: 255 255 255;
   --c-tertiary-container: 61 65 67;
+
+  /* Restaurant brand accent (بيت التميس logo maroon) — used sparingly, scoped
+     to the Catalog/menu feature rather than replacing the app's navy/amber system. */
+  --c-brand: 123 46 40;
+  --c-on-brand: 255 255 255;
 }
 
 .dark {
@@ -94,6 +99,10 @@
   --c-inverse-on-surface: 47 48 54;
   --c-inverse-primary: 0 35 111;
   --c-surface-tint: 182 196 255;
+
+  /* Lightened for contrast on dark surfaces. */
+  --c-brand: 196 108 98;
+  --c-on-brand: 43 15 13;
 }
 
 /* ---------- Angular Material M3 theme (structure + typography) ---------- */

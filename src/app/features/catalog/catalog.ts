@@ -66,12 +66,13 @@ export class Catalog {
       });
   }
 
+  /** Menu items lean on the restaurant brand color (from the logo) instead of the app's navy/amber. */
   protected typeBadgeClass(type: CatalogType): string {
-    return type === 'service' ? 'bg-primary/10 text-primary' : 'bg-secondary-container/15 text-secondary';
+    return type === 'service' ? 'bg-brand text-on-brand' : 'bg-brand/10 text-brand';
   }
 
   protected typeIcon(type: CatalogType): string {
-    return type === 'service' ? 'handyman' : 'inventory_2';
+    return type === 'service' ? 'restaurant_menu' : 'local_pizza';
   }
 
   private notify(key: string): void {
