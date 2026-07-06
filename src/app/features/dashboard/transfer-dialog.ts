@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
+import { CatalogService } from '../../core/catalog.service';
+import { LocalCurrencyPipe } from '../../core/localize.pipes';
 import { CURRENCIES, Transfer } from '../../data/transfers';
 import { FieldError } from '../../shared/field-error/field-error';
 
@@ -19,6 +21,7 @@ import { FieldError } from '../../shared/field-error/field-error';
     MatInputModule,
     MatSelectModule,
     TranslateModule,
+    LocalCurrencyPipe,
     FieldError,
   ],
   template: `
@@ -34,6 +37,18 @@ import { FieldError } from '../../shared/field-error/field-error';
             [placeholder]="'form.customerNamePlaceholder' | translate" />
         </mat-form-field>
         <app-field-error [control]="form.controls.customer" />
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'form.item' | translate }}</mat-label>
+          <mat-select formControlName="itemId" (selectionChange)="onItemChange($event.value)">
+            <mat-option [value]="null">{{ 'form.noItem' | translate }}</mat-option>
+            @for (item of items(); track item.id) {
+              <mat-option [value]="item.id">
+                {{ item.name }} — {{ item.price | localCurrency: item.currency }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>{{ 'form.amount' | translate }}</mat-label>
@@ -76,15 +91,26 @@ import { FieldError } from '../../shared/field-error/field-error';
 export class TransferDialog {
   private readonly fb = inject(FormBuilder);
   private readonly ref = inject(MatDialogRef<TransferDialog>);
+  private readonly catalog = inject(CatalogService);
 
   protected readonly currencies = CURRENCIES;
+  protected readonly items = computed(() => this.catalog.all().filter((i) => i.active));
 
   protected readonly form = this.fb.nonNullable.group({
     customer: ['', [Validators.required, Validators.minLength(3)]],
+    itemId: [null as string | null],
     amount: [null as number | null, [Validators.required, Validators.min(1)]],
     currency: ['USD', Validators.required],
     notes: [''],
   });
+
+  /** Selecting an item pre-fills the amount/currency from its price — still editable afterwards. */
+  protected onItemChange(itemId: string | null): void {
+    const item = this.items().find((i) => i.id === itemId);
+    if (item) {
+      this.form.patchValue({ amount: item.price, currency: item.currency });
+    }
+  }
 
   protected submit(): void {
     if (this.form.invalid) {
@@ -92,6 +118,7 @@ export class TransferDialog {
       return;
     }
     const v = this.form.getRawValue();
+    const item = this.items().find((i) => i.id === v.itemId);
     const result: Transfer = {
       id: 'TRX-' + Math.floor(1000 + Math.random() * 9000),
       customer: v.customer,
@@ -99,6 +126,7 @@ export class TransferDialog {
       currency: v.currency,
       date: new Date().toISOString(),
       status: 'pending',
+      itemName: item?.name,
     };
     this.ref.close(result);
   }

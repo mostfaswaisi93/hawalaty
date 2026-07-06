@@ -8,6 +8,7 @@
     "transfers": "الحوالات",
     "history": "السجل",
     "banks": "البنوك",
+    "catalog": "المنتجات والخدمات",
     "reports": "التقارير",
     "settings": "الإعدادات",
     "menu": "القائمة"
@@ -326,9 +327,49 @@
     "saveSuccess": "تم حفظ البنك بنجاح",
     "deleteSuccess": "تم حذف البنك بنجاح"
   },
+  "catalog": {
+    "title": "المنتجات والخدمات",
+    "subtitle": "إدارة السلع والخدمات التي تقدّمها مع تسعيرتها",
+    "addItem": "إضافة صنف",
+    "editItem": "تعديل صنف",
+    "searchPlaceholder": "ابحث عن سلعة أو خدمة...",
+    "count": "{{count}} صنف",
+    "empty": "لا توجد أصناف",
+    "columns": {
+      "name": "الصنف",
+      "type": "النوع",
+      "category": "الفئة",
+      "price": "السعر",
+      "status": "الحالة"
+    },
+    "types": {
+      "service": "خدمة",
+      "good": "سلعة"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "form": {
+      "name": "اسم الصنف",
+      "namePlaceholder": "مثال: إصلاح هاتف محمول",
+      "type": "النوع",
+      "category": "الفئة",
+      "categoryPlaceholder": "مثال: إلكترونيات",
+      "price": "السعر",
+      "pricePlaceholder": "أدخل السعر",
+      "currency": "العملة",
+      "active": "نشط"
+    },
+    "deleteConfirmTitle": "حذف الصنف",
+    "deleteConfirmText": "هل أنت متأكد من حذف هذا الصنف؟",
+    "saveSuccess": "تم حفظ الصنف بنجاح",
+    "deleteSuccess": "تم حذف الصنف بنجاح"
+  },
   "table": {
     "id": "المعرّف",
     "customer": "العميل",
+    "item": "الصنف / الخدمة",
     "amount": "المبلغ",
     "currency": "العملة",
     "date": "التاريخ",
@@ -346,6 +387,8 @@
     "newTransfer": "حوالة جديدة",
     "customerName": "اسم العميل",
     "customerNamePlaceholder": "أدخل اسم العميل",
+    "item": "الصنف / الخدمة",
+    "noItem": "بدون صنف محدد (حوالة نقدية)",
     "amount": "المبلغ",
     "amountPlaceholder": "أدخل المبلغ",
     "currency": "العملة",
