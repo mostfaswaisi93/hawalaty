@@ -1,0 +1,170 @@
+{
+  "app": {
+    "name": "My Transfers",
+    "tagline": "Fast and secure money transfers"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "banks": "Banks",
+    "reports": "Reports",
+    "menu": "Menu"
+  },
+  "language": {
+    "label": "Language",
+    "arabic": "العربية",
+    "english": "English",
+    "switch": "Switch language"
+  },
+  "user": {
+    "account": "Account",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "greeting": "Welcome",
+    "role": "Administrator"
+  },
+  "auth": {
+    "loginSuccess": "Welcome back!",
+    "logoutSuccess": "You have been logged out",
+    "invalidCredentials": "Invalid email or password"
+  },
+  "login": {
+    "welcome": "Welcome back",
+    "subtitle": "Sign in to manage your transfers",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "remember": "Remember me",
+    "submit": "Sign in",
+    "signingIn": "Signing in...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "brandTitle": "Manage money transfers with confidence",
+    "brandSubtitle": "A modern, bilingual platform for banks, transfers and reports.",
+    "feature1": "Real-time transfer tracking",
+    "feature2": "Multi-bank & multi-currency support",
+    "feature3": "Professional bilingual reports",
+    "demoTitle": "Demo credentials",
+    "useDemo": "Use demo credentials"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "export": "Export",
+    "exportPdf": "Export PDF",
+    "close": "Close",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "reset": "Reset",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "loading": "Loading...",
+    "all": "All",
+    "status": "Status"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of your transfer activity",
+    "newTransfer": "New Transfer",
+    "stats": {
+      "totalTransfers": "Total Transfers",
+      "totalVolume": "Total Volume",
+      "activeCustomers": "Active Customers",
+      "pending": "Pending"
+    },
+    "recentTransfers": "Recent Transfers"
+  },
+  "banks": {
+    "title": "Banks",
+    "subtitle": "Manage the banks available for transfers",
+    "addBank": "Add Bank",
+    "editBank": "Edit Bank",
+    "searchPlaceholder": "Search banks...",
+    "count": "{{count}} banks",
+    "empty": "No banks found",
+    "columns": {
+      "name": "Bank name",
+      "code": "Code",
+      "country": "Country",
+      "swift": "SWIFT / BIC",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "form": {
+      "name": "Bank name",
+      "namePlaceholder": "e.g. National Bank",
+      "code": "Bank code",
+      "codePlaceholder": "e.g. NBK",
+      "country": "Country",
+      "swift": "SWIFT / BIC",
+      "swiftPlaceholder": "e.g. NBKKWKWXXX",
+      "active": "Active"
+    },
+    "deleteConfirmTitle": "Delete bank",
+    "deleteConfirmText": "Are you sure you want to delete this bank?",
+    "saveSuccess": "Bank saved successfully",
+    "deleteSuccess": "Bank deleted successfully"
+  },
+  "table": {
+    "id": "ID",
+    "customer": "Customer",
+    "amount": "Amount",
+    "currency": "Currency",
+    "date": "Date",
+    "status": "Status",
+    "actions": "Actions",
+    "noData": "No data available",
+    "rowsPerPage": "Rows per page"
+  },
+  "status": {
+    "completed": "Completed",
+    "pending": "Pending",
+    "failed": "Failed"
+  },
+  "form": {
+    "newTransfer": "New Transfer",
+    "customerName": "Customer name",
+    "customerNamePlaceholder": "Enter customer name",
+    "amount": "Amount",
+    "amountPlaceholder": "Enter amount",
+    "currency": "Currency",
+    "destination": "Destination country",
+    "notes": "Notes",
+    "notesPlaceholder": "Optional notes"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "minlength": "Must be at least {{count}} characters",
+    "maxlength": "Must be at most {{count}} characters",
+    "min": "Value must be at least {{min}}",
+    "max": "Value must be at most {{max}}",
+    "pattern": "Invalid format"
+  },
+  "messages": {
+    "saveSuccess": "Saved successfully",
+    "saveError": "Something went wrong. Please try again",
+    "deleteConfirmTitle": "Delete confirmation",
+    "deleteConfirmText": "Are you sure you want to delete this transfer?",
+    "deleteSuccess": "Deleted successfully"
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "Generate and export transfer reports",
+    "generatedAt": "Generated at",
+    "period": "Period",
+    "from": "From",
+    "to": "To",
+    "total": "Total",
+    "exportPdf": "Export PDF"
+  }
+}

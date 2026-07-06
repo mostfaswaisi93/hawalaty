@@ -1,0 +1,170 @@
+{
+  "app": {
+    "name": "حوالاتي",
+    "tagline": "تحويلات مالية سريعة وآمنة"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "banks": "البنوك",
+    "reports": "التقارير",
+    "menu": "القائمة"
+  },
+  "language": {
+    "label": "اللغة",
+    "arabic": "العربية",
+    "english": "English",
+    "switch": "تغيير اللغة"
+  },
+  "user": {
+    "account": "الحساب",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "greeting": "مرحباً",
+    "role": "مدير النظام"
+  },
+  "auth": {
+    "loginSuccess": "مرحباً بعودتك!",
+    "logoutSuccess": "تم تسجيل خروجك",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+  },
+  "login": {
+    "welcome": "مرحباً بعودتك",
+    "subtitle": "سجّل الدخول لإدارة حوالاتك",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "remember": "تذكّرني",
+    "submit": "تسجيل الدخول",
+    "signingIn": "جارٍ تسجيل الدخول...",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "brandTitle": "أدر الحوالات المالية بثقة",
+    "brandSubtitle": "منصة عصرية ثنائية اللغة للبنوك والحوالات والتقارير.",
+    "feature1": "تتبّع الحوالات في الوقت الفعلي",
+    "feature2": "دعم متعدد البنوك والعملات",
+    "feature3": "تقارير احترافية ثنائية اللغة",
+    "demoTitle": "بيانات الدخول التجريبية",
+    "useDemo": "استخدام بيانات تجريبية"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "add": "إضافة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث",
+    "export": "تصدير",
+    "exportPdf": "تصدير PDF",
+    "close": "إغلاق",
+    "confirm": "تأكيد",
+    "submit": "إرسال",
+    "reset": "إعادة تعيين",
+    "yes": "نعم",
+    "no": "لا",
+    "actions": "إجراءات",
+    "loading": "جارٍ التحميل...",
+    "all": "الكل",
+    "status": "الحالة"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "subtitle": "نظرة عامة على نشاط حوالاتك",
+    "newTransfer": "حوالة جديدة",
+    "stats": {
+      "totalTransfers": "إجمالي الحوالات",
+      "totalVolume": "إجمالي المبالغ",
+      "activeCustomers": "العملاء النشطون",
+      "pending": "قيد الانتظار"
+    },
+    "recentTransfers": "أحدث الحوالات"
+  },
+  "banks": {
+    "title": "البنوك",
+    "subtitle": "إدارة البنوك المتاحة للحوالات",
+    "addBank": "إضافة بنك",
+    "editBank": "تعديل بنك",
+    "searchPlaceholder": "ابحث عن بنك...",
+    "count": "{{count}} بنك",
+    "empty": "لا توجد بنوك",
+    "columns": {
+      "name": "اسم البنك",
+      "code": "الرمز",
+      "country": "الدولة",
+      "swift": "سويفت / BIC",
+      "status": "الحالة"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "form": {
+      "name": "اسم البنك",
+      "namePlaceholder": "مثال: البنك الوطني",
+      "code": "رمز البنك",
+      "codePlaceholder": "مثال: NBK",
+      "country": "الدولة",
+      "swift": "سويفت / BIC",
+      "swiftPlaceholder": "مثال: NBKKWKWXXX",
+      "active": "نشط"
+    },
+    "deleteConfirmTitle": "حذف البنك",
+    "deleteConfirmText": "هل أنت متأكد من حذف هذا البنك؟",
+    "saveSuccess": "تم حفظ البنك بنجاح",
+    "deleteSuccess": "تم حذف البنك بنجاح"
+  },
+  "table": {
+    "id": "المعرّف",
+    "customer": "العميل",
+    "amount": "المبلغ",
+    "currency": "العملة",
+    "date": "التاريخ",
+    "status": "الحالة",
+    "actions": "إجراءات",
+    "noData": "لا توجد بيانات",
+    "rowsPerPage": "صفوف لكل صفحة"
+  },
+  "status": {
+    "completed": "مكتملة",
+    "pending": "قيد الانتظار",
+    "failed": "فاشلة"
+  },
+  "form": {
+    "newTransfer": "حوالة جديدة",
+    "customerName": "اسم العميل",
+    "customerNamePlaceholder": "أدخل اسم العميل",
+    "amount": "المبلغ",
+    "amountPlaceholder": "أدخل المبلغ",
+    "currency": "العملة",
+    "destination": "دولة الوجهة",
+    "notes": "ملاحظات",
+    "notesPlaceholder": "ملاحظات اختيارية"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال بريد إلكتروني صحيح",
+    "minlength": "يجب أن يكون على الأقل {{count}} أحرف",
+    "maxlength": "يجب ألا يتجاوز {{count}} أحرف",
+    "min": "يجب ألا تقل القيمة عن {{min}}",
+    "max": "يجب ألا تزيد القيمة عن {{max}}",
+    "pattern": "التنسيق غير صحيح"
+  },
+  "messages": {
+    "saveSuccess": "تم الحفظ بنجاح",
+    "saveError": "حدث خطأ ما. يرجى المحاولة مرة أخرى",
+    "deleteConfirmTitle": "تأكيد الحذف",
+    "deleteConfirmText": "هل أنت متأكد من حذف هذه الحوالة؟",
+    "deleteSuccess": "تم الحذف بنجاح"
+  },
+  "reports": {
+    "title": "التقارير",
+    "subtitle": "إنشاء وتصدير تقارير الحوالات",
+    "generatedAt": "تم الإنشاء في",
+    "period": "الفترة",
+    "from": "من",
+    "to": "إلى",
+    "total": "الإجمالي",
+    "exportPdf": "تصدير PDF"
+  }
+}

@@ -1,0 +1,62 @@
+<div class="flex h-screen flex-col">
+  <mat-toolbar class="app-toolbar z-20 !h-16 gap-1 text-white shadow-md">
+    <button mat-icon-button (click)="drawer.toggle()" [attr.aria-label]="'nav.menu' | translate">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="mx-1 flex items-center gap-2">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span class="text-lg font-bold">{{ 'app.name' | translate }}</span>
+    </div>
+
+    <span class="flex-1"></span>
+
+    <app-language-switcher />
+
+    <!-- User menu -->
+    <button mat-button [matMenuTriggerFor]="userMenu" class="!rounded-full">
+      <span class="grid h-9 w-9 place-items-center rounded-full bg-white/20 text-sm font-bold">
+        {{ auth.initials() }}
+      </span>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <span class="grid h-10 w-10 place-items-center rounded-full bg-sky-100 font-bold text-sky-700">
+          {{ auth.initials() }}
+        </span>
+        <div class="leading-tight">
+          <div class="font-semibold">{{ auth.user()?.name }}</div>
+          <div class="text-xs opacity-60">{{ (auth.user()?.role || '') | translate }}</div>
+        </div>
+      </div>
+      <mat-divider />
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>{{ 'user.logout' | translate }}</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="flex-1 !bg-transparent">
+    <mat-sidenav #drawer mode="side" opened class="w-64 border-0 !bg-white">
+      <mat-nav-list class="pt-2">
+        @for (item of nav; track item.link) {
+          <a
+            mat-list-item
+            [routerLink]="item.link"
+            routerLinkActive
+            #rla="routerLinkActive"
+            [activated]="rla.isActive"
+            class="!mx-2 !mb-1 !rounded-xl">
+            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+            <span matListItemTitle>{{ item.key | translate }}</span>
+          </a>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="p-4 md:p-6">
+      <router-outlet />
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
