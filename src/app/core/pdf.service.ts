@@ -28,6 +28,10 @@ export class PdfService {
       scale: 2,
       backgroundColor: '#ffffff',
       useCORS: true,
+      // Render as if on a desktop viewport so `md:` layouts (e.g. the full data table,
+      // hidden in favor of mobile cards below that breakpoint) are captured even when
+      // the export is triggered from a phone.
+      windowWidth: 1280,
     });
 
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });

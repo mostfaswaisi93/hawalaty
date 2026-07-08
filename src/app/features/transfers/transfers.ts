@@ -161,7 +161,14 @@ export class Transfers {
     this.form.controls.paymentMethod.setValue(method);
     this.onPaymentMethodChange(method);
     if (method === 'bank') {
-      this.form.controls.transferredAmount.setValue(this.subtotal());
+      // Let the (currently-empty) field actually mount and paint before giving it a value.
+      // Material only recalculates its notched-outline border when the floating label goes
+      // through a real resting-to-floating transition; setting the value in the same frame the
+      // field is created skips that transition and leaves the border's gap miscalculated (a
+      // stray line artifact). Two rAFs guarantee a full paint has happened in between.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => this.form.controls.transferredAmount.setValue(this.subtotal())),
+      );
     }
   }
 

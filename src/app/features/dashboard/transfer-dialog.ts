@@ -134,9 +134,12 @@ export class TransferDialog {
       this.submitted.set(true);
       return;
     }
-    // Default the transferred-amount field to the order total; still editable afterward.
-    this.form.controls.transferredAmount.setValue(this.subtotal());
     this.step.set('payment');
+    // Default the transferred-amount field to the order total; still editable afterward.
+    // Deferred a tick so the field mounts first — setting a value before Material lays out
+    // the newly-inserted field skips its floating-label transition, leaving the notched-outline
+    // border miscalculated (a stray line artifact).
+    setTimeout(() => this.form.controls.transferredAmount.setValue(this.subtotal()));
   }
 
   protected backToMenu(): void {
@@ -165,6 +168,16 @@ export class TransferDialog {
   protected setPaymentMethod(method: PaymentMethod): void {
     this.form.controls.paymentMethod.setValue(method);
     this.onPaymentMethodChange(method);
+    if (method === 'bank' && !this.form.controls.transferredAmount.value) {
+      // Let the (currently-unmounted) bank fields actually mount and paint before giving this
+      // one a value. Material only recalculates its notched-outline border when the floating
+      // label goes through a real resting-to-floating transition; setting the value in the same
+      // frame the field is created skips that transition and leaves the border's gap
+      // miscalculated (a stray line artifact). Two rAFs guarantee a full paint happens in between.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => this.form.controls.transferredAmount.setValue(this.subtotal())),
+      );
+    }
   }
 
   protected setChangeMethod(method: ChangeMethod): void {
