@@ -8,54 +8,26 @@
     "transfers": "Transfers",
     "history": "History",
     "banks": "Banks & Wallets",
-    "catalog": "Products & Services",
+    "foodMenu": "Menu",
+    "expenses": "Expenses",
     "reports": "Reports",
+    "constants": "Constants",
+    "team": "Team",
     "settings": "Settings",
     "menu": "Menu"
   },
   "history": {
-    "title": "Transaction History",
-    "subtitle": "Track all your past financial transactions with ease.",
+    "title": "Order History",
+    "subtitle": "Track all past restaurant orders with ease.",
     "exportReport": "Export report",
-    "totalTransfers": "Total transactions (this month)",
-    "vsLastMonth": "vs last month",
-    "timeRange": "Time range",
-    "last30": "Last 30 days",
-    "operationType": "Operation type",
+    "totalRevenue": "Total revenue",
+    "orderCount": "{{count}} orders",
+    "paymentMethod": "Payment method",
+    "searchPlaceholder": "Search by customer, item or reference...",
     "prev": "Previous",
     "next": "Next",
-    "showing": "Showing {{from}}-{{to}} of {{total}} transactions",
-    "statuses": {
-      "completed": "Completed",
-      "processing": "Processing",
-      "cancelled": "Cancelled"
-    },
-    "types": {
-      "international": "International transfer",
-      "domestic": "Domestic transfer",
-      "autopay": "Auto payment",
-      "cash": "Cash withdrawal"
-    },
-    "subs": {
-      "intlBank": "International bank",
-      "rinCash": "Rin Cash wallet",
-      "bills": "Bill payment",
-      "personal": "Personal transfer",
-      "localBank": "Local bank"
-    },
-    "names": {
-      "john": "John Smith",
-      "asiacell": "Asiacell Telecom",
-      "mohammedAhmed": "Mohammed Ahmed"
-    },
-    "columns": {
-      "recipient": "Recipient",
-      "dateTime": "Date & time",
-      "type": "Operation type",
-      "reference": "Reference",
-      "status": "Status",
-      "amount": "Amount"
-    }
+    "showing": "Showing {{from}}-{{to}} of {{total}} orders",
+    "empty": "No orders found"
   },
   "forgot": {
     "title": "Reset password",
@@ -71,50 +43,64 @@
     "subtitle": "The page you're looking for doesn't exist or has been moved.",
     "backHome": "Back to dashboard"
   },
+  "help": {
+    "title": "Help Center",
+    "subtitle": "Everything you need to know about using Hawalaty to run your daily orders and sales.",
+    "about": {
+      "title": "What is Hawalaty?",
+      "text": "Hawalaty is your point-of-sale and order management system for بيت التميس. Record every order as a transfer — paid in cash or through a bank/wallet — manage your menu and its categories, track full order history, export professional reports, and keep your banks and wallets up to date, all in one bilingual, dark-mode-ready workspace."
+    },
+    "featuresTitle": "What each page does",
+    "openPage": "Open page",
+    "features": {
+      "dashboard": "Your daily snapshot: today's sales, quick actions, recent expenses and a weekly sales trend at a glance.",
+      "transfers": "Send a standalone transfer with a fee breakdown and confirmation summary.",
+      "history": "The full archive of past orders, searchable and filterable by status and payment method.",
+      "banks": "Manage the banks and wallets used for payments and giving change back to customers.",
+      "menu": "Manage your menu items, prices and availability, organized by category.",
+      "expenses": "Log what your business bought and which bank or wallet paid for it.",
+      "reports": "Generate and export a professional PDF report with totals and averages.",
+      "constants": "Business-wide values, like the menu's categories, editable from one place.",
+      "settings": "Your profile, security and language preferences."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "newOrder": {
+        "q": "How do I record a new order?",
+        "a": "Click \"New Transfer\" from the sidebar or the Send quick action on the Dashboard, add items from the menu, then choose whether the customer paid in cash or through a bank/wallet."
+      },
+      "addCategory": {
+        "q": "How do I add a new menu category?",
+        "a": "Open Constants → Menu Categories, type the new category name and click Add. It appears immediately in the Menu page's filters and in the item form."
+      },
+      "exportReport": {
+        "q": "How do I export a report?",
+        "a": "Open the Reports page and click \"Export PDF\" — the report is generated from your transfer history, ready to save or print."
+      },
+      "language": {
+        "q": "How do I switch language or dark mode?",
+        "a": "Use the language toggle (English / العربية) and the sun/moon icon in the top header — both are available on every page and your choice is remembered."
+      },
+      "banksVsWallets": {
+        "q": "What's the difference between a bank and a wallet?",
+        "a": "Banks require a SWIFT/BIC code, wallets don't. Add either from the Banks & Wallets page and pick the right type — this affects what payment and change options appear in the order form."
+      }
+    },
+    "support": {
+      "title": "Still need help?",
+      "desc": "Reach out and we'll walk you through it.",
+      "action": "Contact support"
+    }
+  },
   "transfers": {
-    "title": "Send new money",
-    "subtitle": "Transfer money securely and quickly anywhere in the world.",
-    "chooseRecipient": "Choose recipient",
-    "addRecipient": "Add new recipient",
-    "searchRecipient": "Search by name, email, or phone number...",
-    "frequentRecipients": "Frequent recipients",
-    "new": "New",
-    "detailsTitle": "Transfer details",
-    "amountSent": "Amount sent",
-    "availableBalance": "Available balance",
-    "receiverGets": "Recipient gets",
-    "exchangeRate": "Exchange rate",
-    "notes": "Notes (optional)",
-    "notesPlaceholder": "Add a short message for the recipient...",
-    "summary": "Transaction summary",
-    "baseAmount": "Base amount",
-    "transferFee": "Transfer fee",
-    "serviceFee": "Service fee",
-    "totalDue": "Total due",
-    "etaTitle": "Estimated arrival time",
-    "etaValue": "Within 15-30 minutes to the recipient's account",
-    "confirmSend": "Confirm & send",
-    "securityTitle": "Full protection",
-    "securityDesc": "All your transactions are encrypted and protected with the highest global security standards.",
-    "promoTitle": "Save 50% on fees",
-    "promoDesc": "Use code FIRST50 on your first transfer this month."
+    "subtitle": "Build an order from the menu and record how it was paid",
+    "emptyCart": "No items added yet",
+    "confirmOrder": "Confirm order"
   },
   "settings": {
     "verifiedAccount": "Verified Account",
     "role": "Senior Financial Consultant",
     "location": "Baghdad, Iraq",
-    "tier": {
-      "current": "Current Tier",
-      "name": "Gold Premium",
-      "next": "Next Tier: Platinum",
-      "viewBenefits": "View Benefits"
-    },
-    "tabs": {
-      "account": "Account Info",
-      "security": "Security",
-      "notifications": "Notifications",
-      "language": "Language"
-    },
     "account": {
       "title": "Account Information",
       "subtitle": "Manage your personal details and public profile.",
@@ -127,35 +113,57 @@
       "bioPlaceholder": "Tell us a little about yourself..."
     },
     "security": {
-      "twoFactor": {
-        "title": "Two-Factor Authentication",
-        "desc": "Enhance your account security by adding an extra layer of protection.",
-        "action": "Setup Now"
-      },
       "devices": {
         "title": "Logged Devices",
         "desc": "You are currently logged in on 3 active devices.",
         "action": "Manage Devices"
-      }
-    },
-    "notifications": {
-      "title": "Latest Activity Notifications",
-      "seeAll": "See All Notifications",
-      "item1": {
-        "title": "Transfer Successful",
-        "desc": "To: Zaid Al-Mansour ($2,400.00)",
-        "time": "2 hours ago"
       },
-      "item2": {
-        "title": "New Login Detected",
-        "desc": "iPhone 15 Pro • Baghdad, IQ",
-        "time": "Yesterday"
+      "activityLog": {
+        "title": "Activity Log",
+        "desc": "Review every action taken on your account and team.",
+        "action": "View Activity Log"
       }
     }
   },
+  "constants": {
+    "title": "Constants",
+    "subtitle": "Business-wide values used across the app. Pick a type below to view or edit it.",
+    "menuCategories": {
+      "title": "Menu Categories",
+      "subtitle": "Manage the categories used to organize your menu",
+      "newCategory": "New category",
+      "newCategoryPlaceholder": "e.g. Desserts",
+      "add": "Add",
+      "addSuccess": "Category added successfully",
+      "invalid": "Please enter a valid, unique category name",
+      "inUseTooltip": "In use — can't be deleted",
+      "deleteConfirmTitle": "Delete category",
+      "deleteConfirmText": "Are you sure you want to delete this category?",
+      "deleteSuccess": "Category deleted successfully"
+    },
+    "addType": {
+      "title": "Add Constant",
+      "nameLabel": "Constant name",
+      "namePlaceholder": "e.g. Payment Methods",
+      "add": "Add & Continue",
+      "invalid": "Please enter a valid, unique name"
+    },
+    "customList": {
+      "description": "{{count}} items",
+      "empty": "No items yet",
+      "newItem": "New item",
+      "newItemPlaceholder": "Enter a value",
+      "add": "Add",
+      "addSuccess": "Item added successfully",
+      "invalid": "Please enter a valid, unique value"
+    },
+    "deleteType": "Delete constant",
+    "deleteTypeConfirmTitle": "Delete constant",
+    "deleteTypeConfirmText": "Are you sure you want to delete this constant and all its items?",
+    "deleteTypeSuccess": "Constant deleted successfully"
+  },
   "header": {
     "searchPlaceholder": "Search a transaction or recipient...",
-    "notifications": "Notifications",
     "help": "Help"
   },
   "footer": {
@@ -176,6 +184,8 @@
     "profile": "Profile",
     "settings": "Settings",
     "logout": "Logout",
+    "logoutConfirmTitle": "Log out",
+    "logoutConfirmText": "Are you sure you want to log out of your account?",
     "greeting": "Welcome",
     "role": "Premium Client"
   },
@@ -205,7 +215,7 @@
     "useDemo": "Use demo credentials",
     "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
-    "contactBank": "Contact your bank",
+    "contactBank": "Create one",
     "copyright": "© 2026 My Transfers. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
@@ -230,67 +240,46 @@
     "loading": "Loading...",
     "all": "All",
     "status": "Status",
-    "filter": "Filter"
+    "filter": "Filter",
+    "increase": "Increase",
+    "decrease": "Decrease",
+    "back": "Back",
+    "view": "View",
+    "suspend": "Suspend",
+    "activate": "Activate"
   },
   "dashboard": {
     "title": "Dashboard",
     "subtitle": "Overview of your transfer activity",
-    "newTransfer": "New Transfer",
-    "balance": {
-      "available": "Total available balance",
-      "account": "Account number",
-      "details": "Balance details"
+    "newTransfer": "New Order",
+    "today": {
+      "salesLabel": "Today's Sales",
+      "ordersLabel": "Orders",
+      "viewReports": "View Reports"
     },
-    "quickActions": {
-      "send": "Send",
-      "request": "Request",
-      "topup": "Top up",
-      "more": "More"
-    },
-    "scheduled": {
-      "title": "Scheduled transfers",
+    "recentExpenses": {
+      "title": "Recent Expenses",
       "viewAll": "View all",
-      "dueLabel": "Due",
-      "tomorrow": "Tomorrow",
-      "rent": "Office rent - monthly",
-      "utilities": "Utilities bill"
-    },
-    "parties": {
-      "sara": "Sara Ali",
-      "electricity": "Electricity Company",
-      "amazon": "Amazon Global",
-      "rafidain": "Rafidain Bank",
-      "jasim": "Jasim Abbas",
-      "ali": "Ali Hassan",
-      "emirates": "Emirates NBD",
-      "reem": "Reem Hamad",
-      "mohammed": "Mohammed Jasim",
-      "layla": "Layla Ahmad",
-      "yassin": "Yassin Omar"
+      "empty": "No expenses yet"
     },
     "insights": {
-      "title": "Spending insights",
-      "monthlySpending": "This month's spending"
+      "title": "Weekly Sales",
+      "weeklyTotal": "Total this week"
     },
     "days": {
-      "sat": "Sat",
       "sun": "Sun",
       "mon": "Mon",
       "tue": "Tue",
-      "wed": "Wed"
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
     },
     "transactions": {
-      "title": "Recent transactions",
-      "subtitle": "Track your latest financial activity in one place",
-      "party": "Recipient / Sender",
-      "type": "Type",
-      "loadMore": "Load more transactions",
-      "online": "Online purchase",
-      "incoming": "Incoming account transfer",
-      "expenseShare": "Expense sharing",
-      "direct": "Direct debit",
-      "bankTransfer": "Bank transfer",
-      "requestType": "Transfer request"
+      "title": "Recent Orders",
+      "subtitle": "Track your latest orders in one place",
+      "viewAll": "View all orders",
+      "empty": "No orders yet"
     }
   },
   "banks": {
@@ -309,8 +298,6 @@
       "name": "Name",
       "type": "Type",
       "code": "Code",
-      "country": "Country",
-      "swift": "SWIFT / BIC",
       "status": "Status"
     },
     "status": {
@@ -323,9 +310,9 @@
       "namePlaceholder": "e.g. National Bank or Jawwal Pay",
       "code": "Code",
       "codePlaceholder": "e.g. NBK",
-      "country": "Country",
-      "swift": "SWIFT / BIC",
-      "swiftPlaceholder": "e.g. NBKKWKWXXX",
+      "phone": "WhatsApp number",
+      "phonePlaceholder": "+970 59 000 0000",
+      "phoneHint": "New orders paid through this account are sent here on WhatsApp",
       "active": "Active"
     },
     "deleteConfirmTitle": "Delete entry",
@@ -333,51 +320,97 @@
     "saveSuccess": "Saved successfully",
     "deleteSuccess": "Deleted successfully"
   },
-  "catalog": {
-    "title": "Products & Services",
-    "subtitle": "Manage the items and services you offer, with pricing",
+  "menu": {
+    "title": "Menu",
+    "subtitle": "Manage your menu items and their prices, by category",
     "addItem": "Add Item",
     "editItem": "Edit Item",
-    "searchPlaceholder": "Search products or services...",
+    "searchPlaceholder": "Search menu items...",
     "count": "{{count}} items",
-    "empty": "No items found",
+    "itemCount": "{{count}} items",
+    "empty": "No menu items found",
     "columns": {
       "name": "Item",
-      "type": "Type",
-      "category": "Category",
       "price": "Price",
       "status": "Status"
     },
-    "types": {
-      "service": "Service",
-      "good": "Good"
-    },
     "status": {
-      "active": "Active",
-      "inactive": "Inactive"
+      "active": "Available",
+      "inactive": "Unavailable"
     },
     "form": {
       "name": "Item name",
-      "namePlaceholder": "e.g. Mobile phone repair",
-      "type": "Type",
+      "namePlaceholder": "e.g. Margherita pizza",
       "category": "Category",
-      "categoryPlaceholder": "e.g. Electronics",
       "price": "Price",
       "pricePlaceholder": "Enter price",
-      "currency": "Currency",
-      "active": "Active"
+      "active": "Available"
     },
     "deleteConfirmTitle": "Delete item",
     "deleteConfirmText": "Are you sure you want to delete this item?",
     "saveSuccess": "Item saved successfully",
     "deleteSuccess": "Item deleted successfully"
   },
+  "expenses": {
+    "title": "Expenses",
+    "subtitle": "Track what was bought and which bank or wallet paid for it",
+    "addExpense": "Add Expense",
+    "editExpense": "Edit Expense",
+    "searchPlaceholder": "Search expenses...",
+    "count": "{{count}} expenses",
+    "empty": "No expenses found",
+    "columns": {
+      "date": "Date",
+      "description": "Description",
+      "paidFrom": "Paid From",
+      "amount": "Amount"
+    },
+    "stats": {
+      "count": "Total expenses",
+      "total": "Total spent",
+      "average": "Average per expense"
+    },
+    "form": {
+      "description": "What was bought",
+      "descriptionPlaceholder": "e.g. 2kg gas cylinder",
+      "amount": "Amount",
+      "amountPlaceholder": "Enter amount",
+      "paidFrom": "Paid from",
+      "date": "Date"
+    },
+    "deleteConfirmTitle": "Delete expense",
+    "deleteConfirmText": "Are you sure you want to delete this expense?",
+    "saveSuccess": "Expense saved successfully",
+    "deleteSuccess": "Expense deleted successfully"
+  },
+  "devices": {
+    "title": "Manage Devices",
+    "subtitle": "Devices currently signed in to your account",
+    "securityTipTitle": "Don't recognize a device?",
+    "securityTipText": "If you see a device you don't recognize, sign out of it immediately and change your password.",
+    "currentDevice": "Current device",
+    "signOut": "Sign out",
+    "signOutAllOthers": "Sign out all other devices",
+    "signOutConfirmTitle": "Sign out device",
+    "signOutConfirmText": "Are you sure you want to sign out this device?",
+    "signOutAllConfirmTitle": "Sign out all other devices",
+    "signOutAllConfirmText": "Are you sure you want to sign out all other devices?",
+    "signOutSuccess": "Signed out successfully",
+    "locations": {
+      "baghdad": "Baghdad, Iraq",
+      "basra": "Basra, Iraq"
+    },
+    "activity": {
+      "now": "Active now",
+      "hoursAgo": "3 hours ago",
+      "yesterday": "Yesterday"
+    }
+  },
   "table": {
     "id": "ID",
     "customer": "Customer",
-    "item": "Item / Service",
+    "item": "Item",
     "amount": "Amount",
-    "currency": "Currency",
     "date": "Date",
     "status": "Status",
     "actions": "Actions",
@@ -390,15 +423,31 @@
     "failed": "Failed"
   },
   "form": {
-    "newTransfer": "New Transfer",
-    "customerName": "Customer name",
-    "customerNamePlaceholder": "Enter customer name",
-    "item": "Item / Service",
-    "noItem": "No specific item (cash transfer)",
-    "amount": "Amount",
-    "amountPlaceholder": "Enter amount",
-    "currency": "Currency",
-    "destination": "Destination country",
+    "newTransfer": "New Order",
+    "walkInCustomer": "Walk-in customer",
+    "items": "Items",
+    "selectItem": "Select an item",
+    "itemsRequired": "Please add at least one item",
+    "total": "Total",
+    "stepChooseItems": "Step 1: Choose items",
+    "stepPayment": "Step 2: Payment details",
+    "backToCategories": "Back to categories",
+    "yourOrder": "Your order",
+    "continueToPayment": "Continue to Payment",
+    "paymentMethod": "Payment method",
+    "paymentCash": "Cash",
+    "paymentBank": "Bank / wallet transfer",
+    "hasChange": "Is there change due?",
+    "changeMethod": "How was the change returned?",
+    "changeCash": "Cash",
+    "changeBank": "Bank / wallet transfer",
+    "selectBank": "Select a bank or wallet",
+    "changeAmount": "Change amount returned",
+    "senderName": "Name of the person who made the transfer",
+    "senderNamePlaceholder": "Enter the sender's name",
+    "senderPhone": "Sender's mobile number",
+    "senderPhonePlaceholder": "+970 59 000 0000",
+    "transferredAmount": "Transferred amount",
     "notes": "Notes",
     "notesPlaceholder": "Optional notes"
   },
@@ -426,6 +475,328 @@
     "from": "From",
     "to": "To",
     "total": "Total",
-    "exportPdf": "Export PDF"
+    "exportPdf": "Export PDF",
+    "empty": "No transactions in this period",
+    "prevPeriod": "Previous period",
+    "nextPeriod": "Next period",
+    "today": "Today",
+    "jumpToDate": "Jump to date",
+    "periods": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "all": "All"
+    },
+    "stats": {
+      "count": "Total transactions",
+      "total": "Total amount",
+      "average": "Average per transaction"
+    }
+  },
+  "signup": {
+    "title": "Create your business account",
+    "subtitle": "Set up your own Hawalaty workspace in a couple of minutes",
+    "steps": {
+      "business": "Business information",
+      "owner": "Owner account"
+    },
+    "form": {
+      "businessName": "Business name",
+      "businessNamePlaceholder": "e.g. بيت التميس",
+      "phone": "Phone number",
+      "ownerName": "Your name",
+      "ownerNamePlaceholder": "e.g. Ahmad Ali",
+      "ownerEmail": "Email",
+      "password": "Password",
+      "passwordHint": "Must be at least 4 characters",
+      "confirmPassword": "Confirm password",
+      "passwordMismatch": "Passwords don't match",
+      "terms": "I agree to the Terms of Service and Privacy Policy"
+    },
+    "submit": "Create account",
+    "submitting": "Setting up your workspace...",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "emailTaken": "This email is already in use",
+    "welcomeMessage": "Welcome to Hawalaty, {{name}}!",
+    "brandTitle": "Run your business on one bilingual workspace",
+    "brandSubtitle": "Orders, menu, banks, expenses, team and reports — all in one place, ready in minutes.",
+    "feature1": "Your own isolated workspace",
+    "feature2": "Invite staff with role-based permissions",
+    "feature3": "Full activity log of every action",
+    "preview": {
+      "salesLabel": "Today's Sales",
+      "newOrder": "New order received",
+      "justNow": "Just now"
+    }
+  },
+  "team": {
+    "title": "Team",
+    "subtitle": "Manage your staff accounts and their roles",
+    "addMember": "Add Member",
+    "editMember": "Edit Member",
+    "tabs": {
+      "members": "Members",
+      "roles": "Roles & Permissions"
+    },
+    "searchPlaceholder": "Search by name or email...",
+    "count": "{{count}} members",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status"
+    },
+    "you": "You",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "empty": "No team members found",
+    "saveSuccess": "Team member saved successfully",
+    "deleteSuccess": "Team member removed successfully",
+    "deleteConfirmTitle": "Remove team member",
+    "deleteConfirmText": "Are you sure you want to remove this team member?",
+    "cannotRemoveSelf": "You can't remove your own account",
+    "cannotRemoveLastOwner": "You can't remove the last Owner of this business",
+    "form": {
+      "name": "Full name",
+      "namePlaceholder": "e.g. Sara Youssef",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Set an initial password",
+      "passwordKeepPlaceholder": "Leave blank to keep current password",
+      "role": "Role",
+      "active": "Active"
+    }
+  },
+  "roles": {
+    "addRole": "Add Role",
+    "editRole": "Edit Role",
+    "saveSuccess": "Role saved successfully",
+    "deleteSuccess": "Role deleted successfully",
+    "deleteConfirmTitle": "Delete role",
+    "deleteConfirmText": "Are you sure you want to delete this role?",
+    "system": "System",
+    "permissionCount": "{{count}} permissions",
+    "form": {
+      "name": "Role name",
+      "namePlaceholder": "e.g. Cashier",
+      "permissions": "Permissions",
+      "permissionsRequired": "Select at least one permission"
+    },
+    "groups": {
+      "orders": "Orders",
+      "menu": "Menu",
+      "banks": "Banks & Wallets",
+      "expenses": "Expenses",
+      "constants": "Constants",
+      "devices": "Devices",
+      "team": "Team"
+    },
+    "permissions": {
+      "transfersCreate": "Create new orders",
+      "menuManage": "Manage menu items",
+      "banksManage": "Manage banks & wallets",
+      "expensesManage": "Manage expenses",
+      "constantsManage": "Manage constants",
+      "devicesManage": "Manage signed-in devices",
+      "teamManage": "Manage team & roles"
+    },
+    "systemRoles": {
+      "owner": "Owner",
+      "manager": "Manager",
+      "staff": "Staff"
+    }
+  },
+  "activityLog": {
+    "title": "Activity Log",
+    "subtitle": "Every action taken across your business, in one place",
+    "searchPlaceholder": "Search by name, email or item...",
+    "category": "Category",
+    "empty": "No activity recorded yet",
+    "columns": {
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Item",
+      "category": "Category",
+      "time": "Time"
+    },
+    "categories": {
+      "auth": "Sign-in",
+      "tenant": "Business",
+      "team": "Team",
+      "banks": "Banks & Wallets",
+      "menu": "Menu",
+      "expenses": "Expenses",
+      "constants": "Constants",
+      "devices": "Devices",
+      "transfers": "Orders"
+    }
+  },
+  "auditLog": {
+    "actions": {
+      "created": "created",
+      "updated": "updated",
+      "deleted": "deleted",
+      "signedOut": "signed out",
+      "suspended": "suspended",
+      "activated": "activated",
+      "planChanged": "changed plan for",
+      "loggedIn": "logged in"
+    },
+    "entities": {
+      "expense": "expense",
+      "bank": "bank/wallet",
+      "menuItem": "menu item",
+      "constant": "constant",
+      "device": "device",
+      "order": "order",
+      "teamMember": "team member",
+      "role": "role",
+      "tenant": "business"
+    }
+  },
+  "admin": {
+    "badge": "Super Admin",
+    "nav": {
+      "dashboard": "Dashboard",
+      "tenants": "Businesses",
+      "logs": "Platform Log",
+      "backups": "Backups"
+    },
+    "dashboard": {
+      "title": "Platform Dashboard",
+      "subtitle": "An overview of every business running on Hawalaty",
+      "totalTenants": "Total businesses",
+      "activeTenants": "Active",
+      "trialTenants": "On trial",
+      "suspendedTenants": "Suspended",
+      "platformStatus": "Platform status",
+      "statusStable": "Stable",
+      "statusAttention": "Needs attention",
+      "recentTenants": "Recent businesses",
+      "recentActivity": "Recent activity",
+      "viewAll": "View all",
+      "noTenants": "No businesses yet",
+      "noActivity": "No activity yet",
+      "exportReport": "Export report",
+      "quickActions": "Quick actions",
+      "quickActionsDesc": "Run critical admin tasks with a single click",
+      "addTenantAction": "Add a business",
+      "viewLogsAction": "View platform log",
+      "exportReportAction": "Export overview as PDF",
+      "activityChart": "Platform activity (7 days)",
+      "tenantAdded": "{{name}} was added successfully",
+      "backupsAction": "Manage backups"
+    },
+    "tenants": {
+      "title": "Businesses",
+      "subtitle": "Every independent business using Hawalaty",
+      "searchPlaceholder": "Search by business, owner or email...",
+      "count": "{{count}} businesses",
+      "empty": "No businesses found",
+      "status": {
+        "trial": "Trial",
+        "active": "Active",
+        "suspended": "Suspended"
+      },
+      "addTenant": "Add Business",
+      "columns": {
+        "business": "Business",
+        "owner": "Owner",
+        "plan": "Plan",
+        "status": "Status"
+      },
+      "plans": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "enterprise": "Enterprise"
+      },
+      "suspend": "Suspend business",
+      "activate": "Activate business",
+      "suspendConfirmTitle": "Suspend business",
+      "suspendConfirmText": "This business will lose access to Hawalaty until reactivated. Continue?",
+      "activateConfirmTitle": "Activate business",
+      "activateConfirmText": "This business will regain access to Hawalaty. Continue?",
+      "suspendSuccess": "Business suspended",
+      "activateSuccess": "Business activated",
+      "planChangedSuccess": "Plan updated successfully"
+    },
+    "tenantDetail": {
+      "info": "Business information",
+      "owner": "Owner",
+      "phone": "Phone",
+      "usersCount": "Team members",
+      "createdAt": "Created on",
+      "team": "Team roster",
+      "recentActivity": "Recent activity",
+      "noTeam": "No team members yet",
+      "notFound": "Business not found",
+      "backToList": "Back to businesses"
+    },
+    "logs": {
+      "title": "Platform Log",
+      "subtitle": "Every action across every business on the platform",
+      "tenant": "Business"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "suspended": "Suspended",
+      "newSignup": "New business signed up",
+      "empty": "You're all caught up"
+    },
+    "backups": {
+      "title": "System Backups",
+      "subtitle": "Manage and secure platform data with manual and scheduled backups",
+      "lastSuccess": "Last successful backup",
+      "hoursAgo": "{{count}} hours ago",
+      "none": "No backups yet",
+      "nextScheduled": "Next run",
+      "totalStorage": "Total storage used",
+      "usedPercent": "{{percent}}% used",
+      "createManual": "Create manual backup",
+      "createManualDesc": "The system will build a full snapshot of the current database and files and store it in the secure archive.",
+      "creating": "Backing up...",
+      "startBackup": "Start backup now",
+      "encryptionTitle": "Encrypted at rest",
+      "encryptionDesc": "Every backup is encrypted with AES-256 before it's stored.",
+      "history": "Backup history",
+      "searchPlaceholder": "Search by backup ID or actor...",
+      "empty": "No backups match your search",
+      "automatedSystem": "Automated system",
+      "columns": {
+        "id": "Backup ID",
+        "date": "Date & time",
+        "size": "Size",
+        "by": "Triggered by",
+        "status": "Status"
+      },
+      "status": {
+        "completed": "Completed",
+        "failed": "Failed",
+        "inProgress": "In progress"
+      },
+      "download": "Download",
+      "restore": "Restore",
+      "showing": "Showing {{from}}-{{to}} of {{total}} backups",
+      "createSuccess": "Backup created successfully",
+      "restoreConfirmTitle": "Restore this backup",
+      "restoreConfirmText": "This will roll the system back to this backup's snapshot. This is a simulated action — no live data will change.",
+      "restoreSuccess": "Restored from {{id}} successfully",
+      "deleteConfirmTitle": "Delete backup",
+      "deleteConfirmText": "Are you sure you want to permanently delete this backup?",
+      "deleteSuccess": "Backup deleted successfully"
+    }
+  },
+  "whatsapp": {
+    "orderMessage": {
+      "title": "New order {{id}}",
+      "customer": "Customer: {{name}}",
+      "items": "Items: {{items}}",
+      "amount": "Amount: {{amount}} ILS",
+      "sender": "Transferred by: {{name}}",
+      "senderPhone": "Sender's number: {{phone}}"
+    }
   }
 }

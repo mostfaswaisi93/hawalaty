@@ -3,7 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Bank, BankEntityType, MOCK_BANKS } from '../../data/banks';
+import { AuditLogService } from '../../core/audit-log.service';
+import { BanksService } from '../../core/banks.service';
+import { PermissionsService } from '../../core/permissions.service';
+import { Bank, BankEntityType } from '../../data/banks';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 import { BankDialog } from './bank-dialog';
 
@@ -15,11 +18,14 @@ type TypeFilter = 'all' | BankEntityType;
   templateUrl: './banks.html',
 })
 export class Banks {
+  private readonly banksService = inject(BanksService);
   private readonly dialog = inject(MatDialog);
   private readonly snackbar = inject(MatSnackBar);
   private readonly translate = inject(TranslateService);
+  private readonly auditLog = inject(AuditLogService);
+  protected readonly permissions = inject(PermissionsService);
 
-  protected readonly banks = signal<Bank[]>([...MOCK_BANKS]);
+  protected readonly banks = this.banksService.all;
   protected readonly query = signal('');
   protected readonly type = signal<TypeFilter>('all');
   protected readonly types: TypeFilter[] = ['all', 'bank', 'wallet'];
@@ -29,7 +35,7 @@ export class Banks {
     const t = this.type();
     return this.banks().filter((b) => {
       const okType = t === 'all' || b.type === t;
-      const okQuery = !q || [b.name, b.code, b.country, b.swift ?? ''].some((f) => f.toLowerCase().includes(q));
+      const okQuery = !q || [b.name, b.code].some((f) => f.toLowerCase().includes(q));
       return okType && okQuery;
     });
   });
@@ -44,15 +50,9 @@ export class Banks {
       .afterClosed()
       .subscribe((result?: Bank) => {
         if (!result) return;
-        this.banks.update((list) => {
-          const idx = list.findIndex((b) => b.id === result.id);
-          if (idx >= 0) {
-            const next = [...list];
-            next[idx] = result;
-            return next;
-          }
-          return [result, ...list];
-        });
+        const isNew = !this.banksService.all().some((b) => b.id === result.id);
+        this.banksService.upsert(result);
+        this.auditLog.log({ action: isNew ? 'created' : 'updated', entityType: 'bank', entityLabel: result.name, category: 'banks' });
         this.notify('banks.saveSuccess');
       });
   }
@@ -67,7 +67,8 @@ export class Banks {
       .afterClosed()
       .subscribe((confirmed?: boolean) => {
         if (!confirmed) return;
-        this.banks.update((list) => list.filter((b) => b.id !== bank.id));
+        this.banksService.remove(bank.id);
+        this.auditLog.log({ action: 'deleted', entityType: 'bank', entityLabel: bank.name, category: 'banks' });
         this.notify('banks.deleteSuccess');
       });
   }

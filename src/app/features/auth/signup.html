@@ -1,0 +1,249 @@
+<div class="page-enter flex min-h-screen flex-col bg-surface text-on-surface">
+  <!-- Top header -->
+  <header class="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-outline-variant bg-surface px-inline-md shadow-sm md:px-inline-lg">
+    <div class="flex items-center gap-3">
+      <app-logo />
+      <span class="font-display-lg text-display-lg font-bold leading-none text-primary">{{ 'app.name' | translate }}</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <app-language-switcher />
+      <app-theme-toggle />
+    </div>
+  </header>
+
+  <main class="flex flex-grow pt-16">
+    <!-- Form side -->
+    <section class="flex w-full items-center justify-center bg-surface px-inline-md py-10 lg:w-1/2 lg:px-24">
+      <div class="w-full max-w-md">
+        <div class="mb-8">
+          <h1 class="mb-2 font-display-lg text-display-lg text-primary">{{ 'signup.title' | translate }}</h1>
+          <p class="font-body-lg text-on-surface-variant">{{ 'signup.subtitle' | translate }}</p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+          <!-- Business info -->
+          <div class="space-y-4 rounded-xl border border-outline-variant/50 p-4">
+            <p class="font-label-caps text-[11px] uppercase tracking-wider text-primary">{{ 'signup.steps.business' | translate }}</p>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="businessName">
+                {{ 'signup.form.businessName' | translate }}
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">storefront</span>
+                <input
+                  id="businessName"
+                  type="text"
+                  formControlName="businessName"
+                  [placeholder]="'signup.form.businessNamePlaceholder' | translate"
+                  class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-3 pe-4 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+              </div>
+              <app-field-error [control]="form.controls.businessName" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="phone">
+                {{ 'signup.form.phone' | translate }}
+              </label>
+              <div class="flex" dir="ltr">
+                <span class="flex items-center rounded-s-xl border-y border-s border-outline-variant bg-surface-container px-4 text-body-sm font-semibold text-on-surface-variant">+970</span>
+                <div class="relative flex-1">
+                  <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">phone_iphone</span>
+                  <input
+                    id="phone"
+                    type="tel"
+                    formControlName="phone"
+                    placeholder="59 000 0000"
+                    class="w-full rounded-e-xl border border-outline-variant bg-surface-container-lowest py-3 pe-4 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+                </div>
+              </div>
+              <app-field-error [control]="form.controls.phone" />
+            </div>
+          </div>
+
+          <!-- Owner info -->
+          <div class="space-y-4 rounded-xl border border-outline-variant/50 p-4">
+            <p class="font-label-caps text-[11px] uppercase tracking-wider text-primary">{{ 'signup.steps.owner' | translate }}</p>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="ownerName">
+                {{ 'signup.form.ownerName' | translate }}
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">person</span>
+                <input
+                  id="ownerName"
+                  type="text"
+                  formControlName="ownerName"
+                  [placeholder]="'signup.form.ownerNamePlaceholder' | translate"
+                  class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-3 pe-4 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+              </div>
+              <app-field-error [control]="form.controls.ownerName" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="ownerEmail">
+                {{ 'signup.form.ownerEmail' | translate }}
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">mail</span>
+                <input
+                  id="ownerEmail"
+                  type="email"
+                  dir="ltr"
+                  formControlName="ownerEmail"
+                  autocomplete="username"
+                  placeholder="name@example.com"
+                  class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-3 pe-4 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+              </div>
+              <app-field-error [control]="form.controls.ownerEmail" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="password">
+                {{ 'signup.form.password' | translate }}
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">lock</span>
+                <input
+                  id="password"
+                  [type]="hidePassword() ? 'password' : 'text'"
+                  formControlName="password"
+                  autocomplete="new-password"
+                  dir="ltr"
+                  class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-3 pe-12 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+                <button
+                  type="button"
+                  (click)="hidePassword.set(!hidePassword())"
+                  [attr.aria-label]="(hidePassword() ? 'login.showPassword' : 'login.hidePassword') | translate"
+                  class="absolute inset-y-0 end-0 flex items-center pe-3 text-outline transition-colors hover:text-primary">
+                  <span class="material-symbols-outlined">{{ hidePassword() ? 'visibility' : 'visibility_off' }}</span>
+                </button>
+              </div>
+              <p class="text-xs text-on-surface-variant">{{ 'signup.form.passwordHint' | translate }}</p>
+              <app-field-error [control]="form.controls.password" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="block font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant" for="confirmPassword">
+                {{ 'signup.form.confirmPassword' | translate }}
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-outline">lock</span>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  dir="ltr"
+                  formControlName="confirmPassword"
+                  autocomplete="new-password"
+                  class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest py-3 pe-4 ps-11 text-body-lg outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-primary" />
+              </div>
+              @if (form.errors?.['mismatch'] && form.controls.confirmPassword.touched) {
+                <p class="text-body-sm text-error">{{ 'signup.form.passwordMismatch' | translate }}</p>
+              }
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <label class="flex cursor-pointer items-start gap-2">
+            <input type="checkbox" formControlName="terms" class="mt-0.5 h-5 w-5 rounded accent-primary" />
+            <span class="font-body-sm text-on-surface-variant">{{ 'signup.form.terms' | translate }}</span>
+          </label>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            [disabled]="loading()"
+            class="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 font-headline-md text-headline-md text-on-primary shadow-lg transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] disabled:opacity-70">
+            @if (loading()) {
+              <span class="h-5 w-5 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
+              <span>{{ 'signup.submitting' | translate }}</span>
+            } @else {
+              <span>{{ 'signup.submit' | translate }}</span>
+              <span class="material-symbols-outlined rtl:-scale-x-100">arrow_forward</span>
+            }
+          </button>
+        </form>
+
+        <!-- Sign-in link -->
+        <div class="mt-8 text-center">
+          <span class="font-body-sm text-on-surface-variant">{{ 'signup.haveAccount' | translate }}</span>
+          <a routerLink="/login" class="px-1 font-body-sm font-bold text-secondary hover:underline">
+            {{ 'signup.signIn' | translate }}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Branding side -->
+    <section class="relative hidden items-center justify-center overflow-hidden bg-primary-container p-inline-lg lg:flex lg:w-1/2">
+      <div class="pointer-events-none absolute inset-0 opacity-30">
+        <div class="absolute -top-1/4 start-[-10%] h-96 w-96 rounded-full bg-primary blur-3xl"></div>
+        <div class="absolute -bottom-1/4 end-[-10%] h-96 w-96 rounded-full bg-secondary-container blur-3xl"></div>
+      </div>
+
+      <!-- Floating product-preview cards -->
+      <div class="pointer-events-none absolute inset-0 hidden xl:block">
+        <div class="absolute start-12 top-28 w-56 -rotate-3 rounded-2xl border border-white/20 bg-white/10 p-4 shadow-xl backdrop-blur-md">
+          <div class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <p class="font-label-caps text-[10px] uppercase tracking-wider text-white/60">{{ 'signup.preview.salesLabel' | translate }}</p>
+              <p class="mt-1 text-xl font-bold text-white" dir="ltr">{{ 2450 | localCurrency }}</p>
+            </div>
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-secondary-container/40 text-white">
+              <span class="material-symbols-outlined">trending_up</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute end-10 bottom-36 w-64 rotate-2 rounded-2xl border border-white/20 bg-white/10 p-4 shadow-xl backdrop-blur-md">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/15 text-white">
+              <span class="material-symbols-outlined">receipt_long</span>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-sm font-bold text-white">{{ 'signup.preview.newOrder' | translate }}</p>
+              <p class="text-xs text-white/60">{{ 'signup.preview.justNow' | translate }}</p>
+            </div>
+            <span class="whitespace-nowrap text-sm font-bold text-white" dir="ltr">+{{ 56 | localCurrency }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative z-10 max-w-lg text-center">
+        <div class="mb-8 flex justify-center">
+          <div class="flex h-24 w-24 items-center justify-center rounded-3xl border border-white/20 bg-white/10 shadow-xl backdrop-blur-md">
+            <span class="material-symbols-outlined text-5xl text-white" data-weight="fill">storefront</span>
+          </div>
+        </div>
+        <h2 class="mb-4 font-display-lg text-[36px] leading-tight text-white">{{ 'signup.brandTitle' | translate }}</h2>
+        <p class="font-body-lg leading-relaxed text-white/80">{{ 'signup.brandSubtitle' | translate }}</p>
+
+        <ul class="mt-10 inline-block space-y-3 text-start">
+          @for (f of features; track f) {
+            <li class="flex items-center gap-3 text-white/90">
+              <span class="material-symbols-outlined text-secondary-container" data-weight="fill">check_circle</span>
+              <span class="font-body-lg">{{ f | translate }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="z-20 flex flex-col items-center justify-between gap-3 border-t border-outline-variant bg-surface-container-lowest px-inline-md py-stack-md md:flex-row md:px-inline-lg">
+    <div class="flex flex-col items-center gap-2 md:flex-row md:gap-4">
+      <div class="flex items-center gap-2">
+        <app-logo />
+        <span class="font-headline-md text-headline-md text-primary">{{ 'app.name' | translate }}</span>
+      </div>
+      <span class="font-body-sm text-on-surface-variant">{{ 'login.copyright' | translate }}</span>
+    </div>
+    <nav class="flex flex-wrap justify-center gap-4">
+      <a class="cursor-pointer font-body-sm text-on-surface-variant transition-colors hover:text-secondary">{{ 'login.privacy' | translate }}</a>
+      <a class="cursor-pointer font-body-sm text-on-surface-variant transition-colors hover:text-secondary">{{ 'login.terms' | translate }}</a>
+      <a class="cursor-pointer font-body-sm text-on-surface-variant transition-colors hover:text-secondary">{{ 'login.support' | translate }}</a>
+    </nav>
+  </footer>
+</div>

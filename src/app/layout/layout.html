@@ -9,13 +9,16 @@
   [class.translate-x-0]="sidebarOpen()"
   [class.-translate-x-full]="!sidebarOpen() && !isRtl()"
   [class.translate-x-full]="!sidebarOpen() && isRtl()">
-  <div class="mb-10 px-4">
-    <span class="block font-display-lg text-display-lg font-bold text-primary">{{ 'app.name' | translate }}</span>
-    <p class="font-body-sm text-body-sm text-on-surface-variant">My Transfers</p>
+  <div class="mb-10 flex items-center gap-3 px-4">
+    <app-logo />
+    <div class="min-w-0">
+      <span class="block font-display-lg text-display-lg font-bold leading-tight text-primary">{{ 'app.name' | translate }}</span>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">My Transfers</p>
+    </div>
   </div>
 
   <nav class="flex-1 space-y-2">
-    @for (item of nav; track item.link) {
+    @for (item of visibleNav(); track item.link) {
       <a
         [routerLink]="item.link"
         routerLinkActive
@@ -35,13 +38,15 @@
   </nav>
 
   <div class="mt-auto border-t border-outline-variant pt-6">
-    <a
-      routerLink="/transfers"
-      (click)="sidebarOpen.set(false)"
-      class="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary-container px-4 py-3 font-bold text-on-secondary-fixed shadow-lg transition-transform active:scale-95">
-      <span class="material-symbols-outlined">add</span>
-      <span>{{ 'dashboard.newTransfer' | translate }}</span>
-    </a>
+    @if (permissions.can('transfers.create')) {
+      <button
+        type="button"
+        (click)="newOrder(); sidebarOpen.set(false)"
+        class="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary-container px-4 py-3 font-bold text-on-secondary-fixed shadow-lg transition-transform active:scale-95">
+        <span class="material-symbols-outlined">add</span>
+        <span>{{ 'dashboard.newTransfer' | translate }}</span>
+      </button>
+    }
 
     <div class="mt-6 flex items-center gap-3 px-2">
       <div class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-primary-container font-bold text-on-primary-container">
@@ -76,7 +81,7 @@
         [attr.aria-label]="'nav.menu' | translate">
         <span class="material-symbols-outlined">menu</span>
       </button>
-      <div class="hidden w-full max-w-md items-center gap-2 rounded-full bg-surface-container px-4 py-1.5 sm:flex">
+      <div class="search-pill hidden w-full max-w-md items-center gap-2 rounded-full bg-surface-container px-4 py-1.5 transition-shadow sm:flex">
         <span class="material-symbols-outlined text-outline">search</span>
         <input
           type="text"
@@ -90,26 +95,19 @@
 
       <div class="flex items-center gap-1 border-s border-outline-variant ps-4 md:ps-6">
         <app-theme-toggle />
-        <button
-          type="button"
-          class="hidden h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary sm:flex"
-          [matTooltip]="'header.notifications' | translate"
-          [attr.aria-label]="'header.notifications' | translate">
-          <span class="material-symbols-outlined">notifications</span>
-        </button>
-        <button
-          type="button"
+        <a
+          routerLink="/help"
           class="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-primary"
           [matTooltip]="'header.help' | translate"
           [attr.aria-label]="'header.help' | translate">
           <span class="material-symbols-outlined">help</span>
-        </button>
+        </a>
       </div>
     </div>
   </header>
 
   <!-- Content -->
-  <main class="mx-auto w-full max-w-7xl flex-1 p-inline-lg">
+  <main class="mx-auto w-full max-w-[1680px] flex-1 p-inline-lg">
     <router-outlet />
   </main>
 
